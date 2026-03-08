@@ -155,7 +155,7 @@ function MainContent() {
 export default function Main({ auth }) {
     return (
         <div className="h-screen overflow-hidden flex flex-col">
-            <Head title="Autoklinika" />
+            <Head title="Strona główna" />
             <Header auth={auth} />
             <div className="flex-grow">
                 <MainContent />
