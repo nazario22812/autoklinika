@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
+use App\Http\Controllers\BookingController;
 
 // --- 1. ГОЛОВНА СТОРІНКА ---
 Route::get('/', function () {
@@ -70,4 +71,5 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/booking', function () {
         return Inertia::render('Booking');
     })->name('booking');    
+    Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
 });

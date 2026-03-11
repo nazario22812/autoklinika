@@ -68,6 +68,8 @@ function Header({ auth }) {
     );
 }
 
+
+
 function MainContent() {
     const {
             data,
@@ -76,8 +78,16 @@ function MainContent() {
             processing,
             recentlySuccessful,   
         } = useForm({
-            marka: ''
+            marka: '',
+            model: '',
+            rok_produkcji: '',
+            numer_rejestracyjny: '',
+            uslugi: '',
+            opis: '',
+            data: '',
+            godzina: ''
         });
+    
     return (
         <div className=" overflow-hidden min-h-screen bg-gradient-to-b from-[#F1511A] to-[#FFAA01]">
             <div className='w-3/5 h-[80vh] bg-gray-200 mx-auto rounded-2xl'>
@@ -265,7 +275,7 @@ function MainContent() {
                         </div>
                     </div>
                     <div className="px-10">
-                        <PrimaryButton className='' disabled={processing}>
+                        <PrimaryButton  className='' disabled={processing}>
                             Potwierdź rezerwację
                         </PrimaryButton>
                     </div>
