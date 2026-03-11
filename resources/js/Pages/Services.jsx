@@ -14,7 +14,8 @@ const servicesData = [
             "Wstępna ocena stanu mechanicznego",
             "Wykrywanie źródeł nieszczelności i wycieków",
             "Ocena stanu zawieszenia і płynów eksploatacyjnych"
-        ]
+        ],
+        price: "od 100 zł"
     },
     {
         id: "olej_filtry",
@@ -26,7 +27,8 @@ const servicesData = [
             "Wymiana filtra powietrza і filtra kabinowego",
             "Wymiana filtra paliwa (w zależności od modelu)",
             "Kontrola poziomu pozostałych płynów"
-        ]
+        ],
+        price: "od 150 zł"
     },
     {
         id: "uklad_hamulcowy",
@@ -38,7 +40,8 @@ const servicesData = [
             "Wymiana płynu hamulcowego i odpowietrzanie układu",
             "Regeneracja i naprawa zacisków hamulcowych",
             "Naprawa układu hamulca ręcznego"
-        ]
+        ],
+        price: "od 200 zł"
     },
     {
         id: "klimatyzacja",
@@ -50,7 +53,8 @@ const servicesData = [
             "Wymiana oleju w sprężarce",
             "Ozonowanie lub odgrzybianie chemiczne kabiny",
             "Wymiana filtra osuszacza i zaworów"
-        ]
+        ],
+        price: "od 250 zł"
     },
     {
         id: "zawieszenie",
@@ -62,7 +66,8 @@ const servicesData = [
             "Wymiana drążków kierowniczych i końcówek drążków",
             "Naprawa i wymiana łożysk kół",
             "Kontrola stanu zawieszenia na szarpakach"
-        ]
+        ],
+        price: "od 180 zł"
     },
     {
         id: "diagnostyka_komputerowa",
@@ -74,7 +79,8 @@ const servicesData = [
             "Diagnostyka elektroniki pokładowej i komfortu",
             "Podgląd parametrów pracy silnika w czasie rzeczywistym",
             "Programowanie i adaptacja nowych podzespołów"
-        ]
+        ],
+        price: "od 150 zł"
     },
     {
         id: "wymiana_rozrzedu",
@@ -86,7 +92,8 @@ const servicesData = [
             "Wymiana pompy wody",
             "Ustawienie faz rozrządu",
             "Gwarancja na wykonaną usługę i części"
-        ]
+        ],
+        price: "od 600 zł"
     },
     {
         id: "geometria_kol",
@@ -97,7 +104,8 @@ const servicesData = [
             "Ustawienie zbieżności kół tylnej osi (jeśli regulowana)",
             "Regulacja kątów pochylenia kół і wyprzedzenia sworznia",
             "Diagnostyka geometrii 3D (laserowa)"
-        ]
+        ],
+        price: "od 200 zł"
     },
     {
         id: "serwis_opon",
@@ -109,7 +117,8 @@ const servicesData = [
             "Naprawa przebitych opon (wulkanizacja)",
             "Wymiana zaworów i czujników ciśnienia TPMS",
             "Przechowywanie opon/kół (Hotel dla opon)"
-        ]
+        ],
+        price: "od 160 zł"
     },
     {
         id: "naprawa_silnika",
@@ -121,7 +130,8 @@ const servicesData = [
             "Naprawa і regeneracja głowic silnika",
             "Wymiana uszczelek (pod głowicą, dekla zaworów, miski olejowej)",
             "Naprawa układu wtryskowego і turbodoładowania"
-        ]
+        ],
+        price: "wycena indywidualna"
     }
 ];
 
@@ -139,6 +149,34 @@ function Header({ auth }) {
                                 Nasze usługi
                             </h2>
                         </div>
+                    </div>
+                    <div className='flex items-center'>
+                        <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center">
+                            <Link href="/booking" className="text-sm font-medium text-gray-700 ml-5 mr-5 ">
+                                Rezerwacja
+                            </Link>
+                        </div>
+                        <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center border-b-[3px] border-gray-900 bg-gray-100">
+                            <Link href="/services" className="text-sm font-medium text-gray-700 ml-5 mr-5 ">
+                                Usługi
+                            </Link>
+                        </div>
+                        
+
+                        <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center">
+                            <Link href="/orders" className="text-sm font-medium text-gray-700 ml-5 mr-5">
+                                Moje zamówienia
+                            </Link>
+                        </div>
+                        
+                        <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center">
+                            <Link href="/faq" className="text-sm font-medium text-gray-700 ml-5 mr-5 ">
+                                FAQ
+                            </Link>
+                        </div>
+                        
+                        
+                    
                     </div>
                     <div className="hidden sm:flex sm:items-center sm:ml-2 gap-10">
                         <Dropdown>
@@ -182,7 +220,7 @@ function AccordionServiceItem({ service }) {
                 <div className="flex items-center gap-4">
                     <span className="text-4xl text-orange-500 p-3 rounded-xl">{service.icon}</span>
                     <h3 className="text-2xl font-semibold text-gray-800 leading-tight">
-                        {service.title}
+                        {service.title}{} <span className="text-xl text-gray-500 ml-4">{service.price}</span>
                     </h3>
                 </div>
                 <span className={`text-gray-400 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
@@ -195,7 +233,7 @@ function AccordionServiceItem({ service }) {
                 }`}
             >
                 <div className="px-6 pb-6 pt-3 text-lg text-gray-700 leading-relaxed bg-gray-50 border-t border-gray-100">
-                    <p className="font-semibold text-gray-900 mb-3">Zakres usługi (Що входить):</p>
+                    <p className="font-semibold text-gray-900 mb-3">Zakres usługi:</p>
                     <ul className="space-y-2.5 list-disc list-outside ml-6 text-base">
                         {service.points.map((point, index) => (
                             <li key={index}>{point}</li>
@@ -236,7 +274,6 @@ function MainContent() {
 
 export default function Main({ auth }) {
     return (
-        // ЗАМІНЕНО h-screen та overflow-hidden на min-h-screen
         <div className="min-h-screen flex flex-col bg-white">
             <Head title="Usługi" />
             <Header auth={auth} />

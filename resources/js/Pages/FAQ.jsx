@@ -78,6 +78,31 @@ function Header({ auth }) {
                             <h2 className="ml-4 text-xl font-semibold leading-tight text-gray-800">Centrum Pomocy FAQ</h2>
                         </div>
                     </div>
+                    <div className='flex items-center'>
+                        <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center ">
+                            <Link href="/booking" className="text-sm font-medium text-gray-700 ml-5 mr-5 ">
+                                Rezerwacja
+                            </Link>
+                        </div>
+                        <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center ">
+                            <Link href="/services" className="text-sm font-medium text-gray-700 ml-5 mr-5 ">
+                                Usługi
+                            </Link>
+                        </div>
+                                            
+                    
+                        <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center">
+                            <Link href="/orders" className="text-sm font-medium text-gray-700 ml-5 mr-5">
+                                Moje zamówienia
+                            </Link>
+                        </div>
+                                            
+                        <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center border-b-[3px] border-gray-900 bg-gray-100">
+                            <Link href="/faq" className="text-sm font-medium text-gray-700 ml-5 mr-5 ">
+                                FAQ
+                            </Link>
+                        </div>
+                    </div>
                     <div className="hidden sm:flex sm:items-center sm:ml-2 gap-10">
                         <Dropdown>
                             <Dropdown.Trigger>
