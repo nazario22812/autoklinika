@@ -9,6 +9,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BookingController;
+use App\Http\Controllers\WizytaController;
 
 // --- 1. ГОЛОВНА СТОРІНКА ---
 Route::get('/', function () {
@@ -31,7 +32,7 @@ Route::middleware('guest')->group(function () {
     Route::get('/register', function () {
         return Inertia::render('Auth/Register');
     })->name('register');
-    Route::post('/register', [UsersController::class, 'store'])->name('register.store');
+    Route::post('/register', [RegisteredUserController::class, 'store'])->name('register.store');
 
     // Відновлення пароля
     Route::get('/forgot-password', function () {
@@ -40,9 +41,19 @@ Route::middleware('guest')->group(function () {
 });
 
 
+
+
+
 // --- 3. ЗАХИЩЕНІ МАРШРУТИ (ТІЛЬКИ ДЛЯ АВТОРИЗОВАНИХ) ---
 Route::middleware(['auth'])->group(function () {
     
+    Route::middleware(['admin'])->group(function () {
+        Route::get('/admin/dashboard', function () {
+            return Inertia::render('Admin/Dashboard');
+        })->name('admin.dashboard');
+    });
+
+
     // Твоя сторінка Welcome після успішного входу
     Route::get('/strona-glowna', function () {
         return Inertia::render('StronaGlowna');
@@ -60,9 +71,11 @@ Route::middleware(['auth'])->group(function () {
         return Inertia::render('Services');
     })->name('services');
 
-    Route::get('/check-order', function () {
-        return Inertia::render('CheckOrder');
-    })->name('check-order');
+    // Route::get('/check-order', function () {
+    //     return Inertia::render('CheckOrder');
+    // })->name('check-order');
+
+    Route::get('/check-order', [UsersController::class, 'index'])->name('check-order');
 
     Route::get('/faq', function () {
         return Inertia::render('FAQ');
@@ -70,6 +83,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/booking', function () {
         return Inertia::render('Booking');
-    })->name('booking');    
-    Route::post('/booking', [BookingController::class, 'store'])->name('booking.store');
+    })->name('wizyta');    
+    Route::post('/booking', [WizytaController::class, 'store'])->name('wizyta.store');
 });

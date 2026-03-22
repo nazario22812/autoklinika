@@ -164,7 +164,7 @@ function Header({ auth }) {
                         
 
                         <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center">
-                            <Link href="/orders" className="text-sm font-medium text-gray-700 ml-5 mr-5">
+                            <Link href="/check-order" className="text-sm font-medium text-gray-700 ml-5 mr-5">
                                 Moje zamówienia
                             </Link>
                         </div>

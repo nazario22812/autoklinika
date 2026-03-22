@@ -33,6 +33,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
+        if (Auth::user()->is_admin) {
+            return redirect()->route('admin.dashboard');
+        }
+
         return redirect()->intended(route('strona-glowna', absolute: false));
     }
 
@@ -46,7 +50,7 @@ class AuthenticatedSessionController extends Controller
         $request->session()->invalidate();
 
         $request->session()->regenerateToken();
-
+        
         return redirect('/login');
     }
 }

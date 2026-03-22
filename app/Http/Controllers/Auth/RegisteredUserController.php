@@ -30,6 +30,7 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
+        
         $request->validate([
             'name' => 'required|string|max:255',
             'surname' => 'required|string|max:255',
@@ -44,11 +45,17 @@ class RegisteredUserController extends Controller
             'phone_number' => $request->phone_number,
             'email' => $request->email,
             'password' => Hash::make($request->password),
+            'is_admin' => false, 
         ]);
 
         event(new Registered($user));
 
+        Auth::login($user);
 
-        return redirect()->route('login');
+        if ($user->is_admin) {
+            return redirect()->route('admin.dashboard');
+        }
+
+        return redirect()->route('strona-glowna');
     }
 }

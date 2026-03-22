@@ -15,6 +15,7 @@ class User extends Model implements AuthenticatableContract
 
     // Твої дозволені поля (не забудь про телефон)
     protected $fillable = [
+        'is_admin',
         'name',
         'surname',
         'email',

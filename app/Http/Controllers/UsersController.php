@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
-
+use Illuminate\Support\Facades\Auth;
+use App\Models\Wizyta;
+use Inertia\Inertia;
 class UsersController extends Controller
 {
     /**
@@ -14,6 +16,13 @@ class UsersController extends Controller
     public function index()
     {
         //
+
+        $wizyty = Wizyta::where('user_id', Auth::id())->get();
+
+        return Inertia::render('CheckOrder', [
+            'mojeWizyty' => $wizyty 
+        ]);
+
     }
 
     /**
@@ -29,13 +38,8 @@ class UsersController extends Controller
      */
     public function store(Request $request)
     {
-        $data = $request->all() ;
-        $data['password'] = Hash::make($request->password);
-        $user = new User();
-        $user->fill($data);
+       
 
-        $user->save();
-        return response()->json($user);
     }
 
     /**
@@ -44,6 +48,7 @@ class UsersController extends Controller
     public function show(User $user)
     {
         //
+    
     }
 
     /**

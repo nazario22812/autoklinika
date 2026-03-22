@@ -41,7 +41,7 @@ function Header({ auth }) {
                                                     
                             
                                 <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center">
-                                    <Link href="/orders" className="text-sm font-medium text-gray-700 ml-5 mr-5">
+                                    <Link href="/check-order" className="text-sm font-medium text-gray-700 ml-5 mr-5">
                                         Moje zamówienia
                                     </Link>
                                 </div>
@@ -98,6 +98,7 @@ function Header({ auth }) {
 
 function MainContent() {
     const {
+            post,
             data,
             setData,
             errors,
@@ -114,10 +115,15 @@ function MainContent() {
             godzina: ''
         });
     
+
+    const submit = (e) => {
+        e.preventDefault();
+        post(route('wizyta.store'));
+    };
     return (
         <div className=" overflow-hidden min-h-screen bg-gradient-to-b from-[#F1511A] to-[#FFAA01]">
             <div className='w-3/5 h-[80vh] bg-gray-200 mx-auto rounded-2xl'>
-                <div className="my-10  max-w-7xl mx-auto h-[100%] overflow-hidden relative">
+                <form onSubmit={submit} className="my-10  max-w-7xl mx-auto h-[100%] overflow-hidden relative">
                     <div>
                         <h1 className='text-4xl font-bold text-gray-900 mx-auto flex items-center justify-center mt-6'>Zarezerwuj termin do naprawy w Autoklinice</h1>
                     </div>
@@ -126,7 +132,7 @@ function MainContent() {
                             <section >
                                 
 
-                                <form  className="mt-6 space-y-6 h-full ">
+                                <div  className="mt-6 space-y-6 h-full ">
                                     <div>
                                         <InputLabel htmlFor="marka" value="Marka" />
 
@@ -134,8 +140,8 @@ function MainContent() {
                                             id="marka"
                                             className="mt-1 block w-[80%]"
                                             placeholder="np. Toyota"
-                                            // value={data.marka}
-                                            // onChange={(e) => setData('marka', e.target.value)}
+                                            value={data.marka}
+                                            onChange={(e) => setData('marka', e.target.value)}
                                             required
                                             isFocused
                                         />
@@ -150,8 +156,8 @@ function MainContent() {
                                             id="model"
                                             className="mt-1 block w-[80%]"
                                             placeholder="np. Corolla"
-                                            // value={data.model}
-                                            // onChange={(e) => setData('model', e.target.value)}
+                                            value={data.model}
+                                            onChange={(e) => setData('model', e.target.value)}
                                             required
                                             isFocused
                                         />
@@ -167,9 +173,9 @@ function MainContent() {
                                             type="number"
                                             className="mt-1 block w-[80%] [appearance:textfield] [&::-webkit-outer-spin-button]:appearance-none [&::-webkit-inner-spin-button]:appearance-none"
                                             placeholder="np. 2008"                                            
-                                            //value={data.phone_number}
+                                            value={data.rok_produkcji}
 
-                                            //onChange={(e) => setData('phone_number', e.target.value)}
+                                            onChange={(e) => setData('rok_produkcji', e.target.value)}
                                             required
                                             isFocused
                                             
@@ -185,8 +191,8 @@ function MainContent() {
                                         <TextInput
                                             id="numer_rejestracyjny"
                                             className="mt-1 block w-[80%] uppercase"
-                                            //value={data.email}
-                                            //onChange={(e) => setData('email', e.target.value)}
+                                            value={data.numer_rejestracyjny}
+                                            onChange={(e) => setData('numer_rejestracyjny', e.target.value)}
                                             required
                                             placeholder="np. LUB067AS"
                                             isFocused
@@ -194,27 +200,36 @@ function MainContent() {
 
                                         {/*<InputError className="mt-2" message={errors.email} /> */}
                                     </div>
-                                </form>
+                                </div>
                             </section>
                         </div>
                         <div className='h-full'>
                             <section>
-                                <form className="mt-6 space-y-6 h-full">
+                                <div className="mt-6 space-y-6 h-full">
                                     <div>
                                         <InputLabel htmlFor="uslugi" value="Usługi" />
-                                        <select name="uslugi" id="uslugi" className='w-[80%] rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500'>
-                                            <option value="">Wybierz usługę</option>
-                                            <option value="diagnostyka">Diagnostyka ogólna</option>
-                                            <option value="olej_filtry">Wymiana oleju i filtrów</option>
-                                            <option value="uklad_hamulcowy">Naprawa układu hamulcowego</option>
-                                            <option value="klimatyzacja">Serwis klimatyzacji</option>
-                                            <option value="zawieszenie">Naprawa zawieszenia</option>
-                                            <option value="diagnostyka_komputerowa">Diagnostyka komputerowa</option>
-                                            <option value="wymiana_rozrzedu">Wymiana rozrządu</option>
-                                            <option value="geometria_kol">Geometria kół</option>
-                                            <option value="serwis_opon">Serwis opon / Wulkanizacja</option>
-                                            <option value="naprawa_silnika">Naprawa silnika</option>
+                                        <select 
+                                            name="uslugi" 
+                                            id="uslugi" 
+                                            value={data.uslugi} 
+                                            onChange={(e) => setData('uslugi', e.target.value)} 
+                                            className='w-[80%] rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500'
+                                            
+                                        >
+                                            <option value="" disabled>Wybierz usługę</option>
+                                            <option value="Diagnostyka ogólna">Diagnostyka ogólna</option>
+                                            <option value="Wymiana oleju i filtrów">Wymiana oleju i filtrów</option>
+                                            <option value="Naprawa układu hamulcowego">Naprawa układu hamulcowego</option>
+                                            <option value="Serwis klimatyzacji">Serwis klimatyzacji</option>
+                                            <option value="Naprawa zawieszenia">Naprawa zawieszenia</option>
+                                            <option value="Diagnostyka komputerowa">Diagnostyka komputerowa</option>
+                                            <option value="Wymiana rozrządu">Wymiana rozrządu</option>
+                                            <option value="Geometria kół">Geometria kół</option>
+                                            <option value="Serwis opon / Wulkanizacja">Serwis opon / Wulkanizacja</option>
+                                            <option value="Naprawa silnika">Naprawa silnika</option>
+                                            
                                         </select>
+                                        
                                     </div>
 
                                     <div>
@@ -223,8 +238,8 @@ function MainContent() {
                                             id="opis"
                                             className="mt-1 h-[135px] block w-[80%] rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                             placeholder="Dodatkowe informacje..."
-                                            //value={data.opis}
-                                            //onChange={(e) => setData('opis', e.target.value)}
+                                            value={data.opis}
+                                            onChange={(e) => setData('opis', e.target.value)}
                                         />
                                     </div>
 
@@ -236,8 +251,8 @@ function MainContent() {
                                                 id="data"
                                                 type="date"
                                                 className="mt-1 block w-[60%]"
-                                                //value={data.data}
-                                                //onChange={(e) => setData('data', e.target.value)}
+                                                value={data.data}
+                                                onChange={(e) => setData('data', e.target.value)}
                                                 required
                                                 isFocused
                                             />
@@ -249,15 +264,15 @@ function MainContent() {
                                                 id="godzina"    
                                                 type="time"
                                                 className="mt-1 block w-[60%]"
-                                                //value={data.godzina}
-                                                //onChange={(e) => setData('godzina', e.target.value)}
+                                                value={data.godzina}
+                                                onChange={(e) => setData('godzina', e.target.value)}
                                                 required
                                                 isFocused
                                             />
                                         </div>
                                         
                                     </div>
-                                </form>
+                                </div>
                             </section>
                         </div>
                     </div>
@@ -295,7 +310,7 @@ function MainContent() {
 
                             <div className="flex flex-col border-l pl-4 border-gray-100">
                                 <span className="text-xs text-gray-500 uppercase font-bold tracking-wider">Termin</span>
-                                <span className="text-sm font-semibold text-gray-900">{data.data || '—'}</span>
+                                <span className="text-sm font-semibold text-gray-900">{data.data + ' ' + data.godzina || '—'}</span>
                             </div>
 
                         </div>
@@ -305,7 +320,7 @@ function MainContent() {
                             Potwierdź rezerwację
                         </PrimaryButton>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
     );
