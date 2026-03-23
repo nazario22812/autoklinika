@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Wizyta;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use MongoDB\Builder\Expression\ToUpperOperator;
 
 class WizytaController extends Controller
 {
@@ -51,17 +52,21 @@ class WizytaController extends Controller
             //'godzina_wizyty' => 'required|time',
         ]);
 
+        
+
         $wizyta = Wizyta::create([
             'marka' => $request->marka,
             'model' => $request->model,
             'rok_produkcji' => $request->rok_produkcji,
-            'numer_rejestracyjny' => $request->numer_rejestracyjny,
+            'numer_rejestracyjny' =>strtoupper($request->numer_rejestracyjny),
             'usluga' => $request->uslugi,
             'opis' => $request->opis,
             'data_wizyty' => $request->data,
             'godzina_wizyty' => $request->godzina,
             'status' => "oczekujące",
             'user_id' => $request->user()->id,
+            'komentarz_mechanika' => null,
+            'cena' => null,
         ]);
 
 

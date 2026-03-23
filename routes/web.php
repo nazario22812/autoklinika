@@ -76,6 +76,7 @@ Route::middleware(['auth'])->group(function () {
     // })->name('check-order');
 
     Route::get('/check-order', [UsersController::class, 'index'])->name('check-order');
+    Route::get('/check-order/{id}', [UsersController::class, 'szczegoly'])->name('szczegoly');
 
     Route::get('/faq', function () {
         return Inertia::render('FAQ');

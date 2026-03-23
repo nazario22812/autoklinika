@@ -97,6 +97,8 @@ function Header({ auth }) {
 
 
 function MainContent({ mojeWizyty }) {
+     
+
     return (
         <div className="overflow-hidden min-h-screen bg-gradient-to-b from-[#F1511A] to-[#FFAA01]">
             <div className='w-3/5 h-[80vh] bg-gray-200 mx-auto rounded-2xl mt-10 shadow-xl'>
@@ -127,10 +129,13 @@ function MainContent({ mojeWizyty }) {
                                             </div>
 
                                             <div className="text-right flex flex-col items-end">
-                                                <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide ${
-                                                    wizyta.status === 'oczekujące' ? 'bg-orange-100 text-orange-600' : 
-                                                    wizyta.status === 'zakończone' ? 'bg-green-100 text-green-600' : 
-                                                    'bg-blue-100 text-blue-600'
+                                                <span className={`px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wide ${                                                    
+                                                    wizyta.status === 'oczekujące' ? 'bg-red-200 text-red-600' : 
+                                                    wizyta.status === 'rozpatrywane' ? 'bg-blue-200 text-blue-600' : 
+                                                    wizyta.status === 'wtrakcie' ? 'bg-orange-200 text-orange-600' :
+                                                    wizyta.status === 'gotowe' ? 'bg-green-200 text-green-600':
+                                                    wizyta.status === 'oplacone' ? 'bg-gray-800 text-gray-100':
+                                                    'gray-200 text-gray-600'
                                                 }`}>
                                                     {wizyta.status}
                                                 </span>
@@ -149,9 +154,12 @@ function MainContent({ mojeWizyty }) {
                                         </div>
 
                                         <div className="mt-4 pt-4 border-t border-gray-100 flex justify-end">
-                                            <button className="text-sm font-semibold text-[#F1511A] border-2 border-[#F1511A] px-5 py-1.5 rounded-lg hover:bg-[#F1511A] hover:text-white transition-colors duration-200">
+                                            <Link 
+                                                href={route('szczegoly', wizyta.id)} 
+                                                className="text-sm font-semibold text-[#F1511A] border-2 border-[#F1511A] px-5 py-1.5 rounded-lg hover:bg-[#F1511A] hover:text-white transition-colors duration-200"
+                                            >
                                                 SZCZEGÓŁY
-                                            </button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -161,6 +169,7 @@ function MainContent({ mojeWizyty }) {
                                 <p className='text-gray-600 text-lg'>Nie masz jeszcze żadnych zamówień.</p>
                                 <Link href="/booking" className="mt-4 inline-block text-[#F1511A] font-semibold hover:underline">
                                     Zarezerwuj wizytę teraz
+
                                 </Link>
                             </div>
                         )}

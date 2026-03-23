@@ -35,6 +35,8 @@ return new class extends Migration
             $table->date('data_wizyty');
             $table->time('godzina_wizyty');
             $table->string('status')->default('oczekujący');
+            $table->string('komentarz_mechanika');
+            $table->float('cena');
             $table->timestamps();
         });
     }

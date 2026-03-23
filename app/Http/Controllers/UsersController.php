@@ -25,6 +25,16 @@ class UsersController extends Controller
 
     }
 
+    public function szczegoly($id){
+        $zamowienie = Wizyta::where('_id', $id)
+                        ->where('user_id', Auth::id())
+                        ->firstOrFail(); 
+
+        return Inertia::render('SzczegolyOrder', [
+            'zamowienie' => $zamowienie
+        ]);
+    }
+
     /**
      * Show the form for creating a new resource.
      */

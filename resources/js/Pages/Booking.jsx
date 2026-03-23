@@ -117,6 +117,7 @@ function MainContent() {
     
 
     const submit = (e) => {
+        
         e.preventDefault();
         post(route('wizyta.store'));
     };
@@ -316,7 +317,7 @@ function MainContent() {
                         </div>
                     </div>
                     <div className="px-10">
-                        <PrimaryButton  className='' disabled={processing}>
+                        <PrimaryButton  className='' disabled={processing} >
                             Potwierdź rezerwację
                         </PrimaryButton>
                     </div>
