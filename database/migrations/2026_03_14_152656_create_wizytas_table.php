@@ -24,7 +24,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('wizytas', function (Blueprint $table) {
-            //$table->id();
+            $table->id();
             $table->string('user_id')->index();            
             $table->string('marka');
             $table->string('model');
