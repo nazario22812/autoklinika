@@ -113,6 +113,11 @@ function Header({ auth }) {
                             </Dropdown.Trigger>
                             <Dropdown.Content>
                                 <Dropdown.Link href={route('profile.edit')} className='font-semibold text-xs'>Mój profil</Dropdown.Link>
+                                {auth?.user?.is_admin && (
+                                    <Dropdown.Link href={route('admin.dashboard')}>
+                                        Panel Admina
+                                    </Dropdown.Link>
+                                )}
                                 <Dropdown.Link className='font-semibold text-xs' href={route('logout')} method="post" as="button">Wyjście</Dropdown.Link>
                             </Dropdown.Content>
                         </Dropdown>
@@ -183,7 +188,7 @@ function MainContent() {
 export default function FAQ({ auth }) {
     return (
         <div className="min-h-screen flex flex-col bg-white">
-            <Head title="FAQ - Autoklinika" />
+            <Head title="FAQ" />
             <Header auth={auth} />
             <div className="flex-grow">
                 <MainContent />

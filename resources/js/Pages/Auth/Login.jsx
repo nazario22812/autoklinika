@@ -70,7 +70,7 @@ export default function Login({ status, canResetPassword }) {
 
                 <div className="mt-4 block">
                     <label className="flex items-center">
-                        <Checkbox
+                        {/* <Checkbox
                             name="remember"
                             checked={data.remember}
                             onChange={(e) =>
@@ -79,7 +79,7 @@ export default function Login({ status, canResetPassword }) {
                         />
                         <span className="ms-2 text-sm text-gray-600">
                             Remember me
-                        </span>
+                        </span> */}
                     </label>
                 </div>
 

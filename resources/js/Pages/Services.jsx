@@ -196,6 +196,11 @@ function Header({ auth }) {
                                 <Dropdown.Link href={route('profile.edit')} className='font-semibold text-xs'>
                                     Mój profil
                                 </Dropdown.Link>
+                                {auth?.user?.is_admin && (
+                                    <Dropdown.Link href={route('admin.dashboard')}>
+                                        Panel Admina
+                                    </Dropdown.Link>
+                                )}
                                 <Dropdown.Link className='font-semibold text-xs' href={route('logout')} method="post" as="button">
                                     Wyjście
                                 </Dropdown.Link>

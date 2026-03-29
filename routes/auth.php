@@ -59,6 +59,4 @@ Route::middleware('auth')->group(function () {
         ->name('logout');
 });
 
-Route::middleware('admin')->group(function () {
-   
-});
+

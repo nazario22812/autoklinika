@@ -51,6 +51,11 @@ function Header({ auth }) {
                                          <Dropdown.Link href={route('profile.edit')} className='font-semibold text-xs' > {/*href={route('profile.edit')} */}
                                             Mój profil
                                         </Dropdown.Link>
+                                        {auth?.user?.is_admin && (
+                                            <Dropdown.Link href={route('admin.dashboard')}>
+                                                Panel Admina
+                                            </Dropdown.Link>
+                                        )}
                                         <Dropdown.Link className='font-semibold text-xs' href={route('logout')} method="post" as="button">
                                             Wyjście
                                         </Dropdown.Link>
@@ -98,7 +103,7 @@ function MainContent() {
             </div>
             <div className=" w-full h-[200px] lg:h-[900px] overflow-hidden relative">
   
-                <div className="grid grid-cols-3 gap-10 max-w-7xl w-full min-h-[300px] mx-auto px-4 overflow-hidden relative rounded-xl shadow-md">
+                <div className="grid grid-cols-3 gap-10 max-w-7xl w-full min-h-[300px] mx-auto px-4 overflow-hidden relative rounded-xl">
     
   
                     {/* Секція 1: Послуги */}

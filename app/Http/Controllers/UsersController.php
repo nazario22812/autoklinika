@@ -7,12 +7,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Wizyta;
+use Illuminate\Validation\Rules\In;
 use Inertia\Inertia;
 class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
+
+    
+
     public function index()
     {
         //
@@ -35,6 +39,7 @@ class UsersController extends Controller
         ]);
     }
 
+    
     /**
      * Show the form for creating a new resource.
      */

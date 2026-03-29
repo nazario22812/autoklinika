@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ProfileController;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
@@ -48,9 +49,13 @@ Route::middleware('guest')->group(function () {
 Route::middleware(['auth'])->group(function () {
     
     Route::middleware(['admin'])->group(function () {
-        Route::get('/admin/dashboard', function () {
-            return Inertia::render('Admin/Dashboard');
-        })->name('admin.dashboard');
+        // Route::get('/admin/dashboard', function () {
+        //     return Inertia::render('Admin/Dashboard');
+        // })->name('admin.dashboard');
+        Route::get('admin/dahboard', [AdminController::class, 'counts'])->name('admin.dashboard');
+        Route::get('admin/user-list', [AdminController::class, 'getallusers'])->name('admin.users');
+        Route::post('admin/user-list', [AdminController::class, 'updateRole'])->name('admin.updateRole');
+        Route::get('admin/zamowienia', [AdminController::class, 'getallorders'])->name('admin.zamowienia');
     });
 
 
@@ -87,3 +92,4 @@ Route::middleware(['auth'])->group(function () {
     })->name('wizyta');    
     Route::post('/booking', [WizytaController::class, 'store'])->name('wizyta.store');
 });
+
