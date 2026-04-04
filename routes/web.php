@@ -56,6 +56,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('admin/user-list', [AdminController::class, 'getallusers'])->name('admin.users');
         Route::post('admin/user-list', [AdminController::class, 'updateRole'])->name('admin.updateRole');
         Route::get('admin/zamowienia', [AdminController::class, 'getallorders'])->name('admin.zamowienia');
+        Route::post('admin/zamowienia/anuluj/{id}', [AdminController::class, 'anulowanie'])->name('admin.zamowienia.anuluj');
+        Route::post('admin/zamowienia/wziaczamowienie/{id}', [AdminController::class, 'wziaczamowienie'])->name('admin.zamowienia.wziaczamowienie');
     });
 
 

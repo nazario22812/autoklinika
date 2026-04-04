@@ -140,6 +140,7 @@ function MainContent({ mojeWizyty }) {
                                                     wizyta.status === 'wtrakcie' ? 'bg-orange-200 text-orange-600' :
                                                     wizyta.status === 'gotowe' ? 'bg-green-200 text-green-600':
                                                     wizyta.status === 'oplacone' ? 'bg-gray-800 text-gray-100':
+                                                    wizyta.status === 'anulowane' ? 'bg-gray-300 text-gray-500 line-through' :
                                                     'gray-200 text-gray-600'
                                                 }`}>
                                                     {wizyta.status}
@@ -157,7 +158,7 @@ function MainContent({ mojeWizyty }) {
                                                 </div>
                                             </div>
                                         </div>
-
+                                        
                                         <div className="mt-4 pt-4 border-t border-gray-100 flex justify-end">
                                             <Link 
                                                 href={route('szczegoly', wizyta.id)} 

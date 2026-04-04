@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Wizyta;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
 {
@@ -38,10 +39,29 @@ class AdminController extends Controller
     }
 
     public function getallorders(){
-        $zamowienia = Wizyta::latest()->get();
+        $zamowienia = Wizyta::where('status', '!=', 'oplacone')->latest()->get();
         return Inertia::render('Admin/ZamowienieList', [
             'zamowienia' => $zamowienia,
         ]);
 
+    }
+
+    public function anulowanie(Request $request, $id){
+        $zamowienie = Wizyta::find($id);
+        if ($zamowienie) {
+            $zamowienie->status = 'anulowane';
+            $zamowienie->save();
+        }
+        return redirect()->route('admin.zamowienia')->with('success', 'Zamówienie zostało anulowane.');
+    }
+
+    public function wziaczamowienie(Request $request, $id){
+        $zamowienie = Wizyta::find($id);
+        if ($zamowienie) {
+            $zamowienie->status = 'rozpatrywane';
+            $zamowienie->mechanik_id = Auth::id();
+            $zamowienie->save();
+        }
+        return redirect()->route('admin.zamowienia')->with('success', 'Zamówienie zostało wzięte do realizacji.');
     }
 }

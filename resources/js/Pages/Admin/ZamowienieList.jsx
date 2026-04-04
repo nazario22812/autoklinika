@@ -98,37 +98,90 @@ function OrderRow({ zamowienie }) {
 
                 </td>
 
-                <td className="px-8 py-5 text-right "> 
+                {/* <td className="px-8 py-5 text-right "> 
                     <span className='text-orange-500 text-bold-xl'>
                         {zamowienie.usluga}
                     </span>
+                </td> */}
+
+
+
+                <td className='px-8 py-5 text-right'>
+                    {zamowienie.status === 'oczekujące' ? (
+                        <span className='px-3 py-1.5 rounded-lg text-sm font-semibold text-yellow-700 bg-yellow-100'>
+                            Oczekujące
+                        </span>
+                    ) : zamowienie.status === 'rozpatrywane' ? (
+                        <span className='px-3 py-1.5 rounded-lg text-sm font-semibold text-blue-700 bg-blue-100'>
+                            Rozpatrywane
+                        </span>
+                    ) : zamowienie.status === 'wtrakcie' ? (
+                        <span className='px-3 py-1.5 rounded-lg text-sm font-semibold text-orange-700 bg-orange-100'>
+                            W trakcie
+                        </span>
+                    ) : zamowienie.status === 'gotowe' ? (
+                        <span className='px-3 py-1.5 rounded-lg text-sm font-semibold text-green-700 bg-green-100'>
+                            Zakończone
+                        </span>
+                    )
+                    : zamowienie.status === 'oplacone' ? (
+                        <span className='px-3 py-1.5 rounded-lg text-sm font-semibold text-gray-800 bg-gray-100'>
+                            Opłacone
+                        </span>
+                    ) : 
+                    zamowienie.status === 'anulowane' ? (
+                        <span className='px-3 py-1.5 rounded-lg text-sm font-semibold text-gray-500 bg-gray-300 line-through'>
+                            Anulowane
+                        </span>
+                    ) : null}  
+
                 </td>
 
                 {/* <td className="px-8 py-5 text-right text-sm text-gray-500 font-mono">
                     {new Date(user.created_at).toLocaleDateString('pl-PL')}
-                </td> 
-
-                {/* <td className="px-8 py-5 text-right">
-                    {/* <button 
-                        onClick={() => setIsOpen(!isOpen)}
-                        className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold text-orange-500 hover:bg-orange-100 transition-colors focus:outline-none"
-                    >
-                        Szczegóły
-                        <span className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>▼</span>
-                    </button> 
-                </td> */}
+                </td>  */}
+                {
+                    zamowienie.status != 'anulowane' &&(
+                        <td className="px-8 py-5 text-right">
+                            <button 
+                                onClick={() => setIsOpen(!isOpen)}
+                                className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold text-orange-500 hover:bg-orange-100 transition-colors focus:outline-none"
+                            >
+                                Szczegóły
+                                <span className={`transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>▼</span>
+                            </button> 
+                        </td> 
+                    )
+                } 
+                
             </tr>
 
-            {/* <tr>
+            <tr>
                 <td colSpan="5" className="p-0 border-0">
-                    <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[1000px] opacity-100 border-b border-gray-300' : 'max-h-0 opacity-0'}`}>
+                    <div className={` overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[1000px] opacity-100 border-b border-gray-300' : 'max-h-0 opacity-0'}`}>
                         
-                        <div className="grid grid-cols-2 px-8 py-6 bg-gray-50 flex items-center justify-between">
-                            <div>
+                        <div className=" grid grid-cols-2 px-8 py-6 bg-gray-100 flex items-center justify-between">
+                            <div className='text-left'>
                                 <p className="text-sm text-gray-500 font-semibold mb-1">Dodatkowe informacje</p>
-                                <p className="text-gray-800">Numer telefonu: <span className="font-mono">{user.phone_number}</span></p>
+                                <p className="text-orange-500 font-bold ">Usluga: <span className="font-mono bg-orange-100 p-2 rounded-xl">{zamowienie.usluga}</span></p>
+                                <p className="text-orange-500 font-bold mt-4">Opis: <span className="font-mono bg-orange-100 p-2 rounded-xl">{zamowienie.opis}</span></p>
                             </div>
 
+                            <div className='text-right'>
+                                
+                                {zamowienie.status === 'oczekujące' && (
+
+                                
+                                    <button onClick={() => router.post(route('admin.zamowienia.wziaczamowienie', { id: zamowienie.id }))} className="mr-4 px-3 py-1.5 rounded-lg text-sm font-semibold text-green-700 bg-green-100 active:bg-green-300 hover:bg-green-200 transition-colors">
+                                        <span className='text-2xl font-bold'>Wziąć w realizację</span>
+                                    </button>
+                                )}
+                                <button onClick={() => router.post(route('admin.zamowienia.anuluj', { id: zamowienie.id } , setIsOpen(!isOpen)))} className="font-bold px-3 py-1.5 rounded-lg text-sm font-semibold text-red-700 bg-red-100 active:bg-red-300 hover:bg-red-200 transition-colors">
+                                        <span className='text-2xl font-bold'>Anulować</span>
+                                        
+                                </button>
+                            </div>
+                            {/*
                             <div className='text-right pr-10'>
                                 <p className="text-sm text-gray-500 font-semibold mb-1">Rola użytkownika</p>
                                 {user.is_admin ? (
@@ -141,12 +194,12 @@ function OrderRow({ zamowienie }) {
                                         Zrobić administoratorem
                                     </button>
                                 )}
-                            </div>
+                            </div> */}
                         </div>
 
                     </div>
                 </td>
-            </tr> */}
+            </tr> 
         </>
     );
 }
@@ -183,7 +236,9 @@ function MainContent({ auth, zamowienia }) {
                                 <th className="px-8 py-4 font-medium">Numer rejestracyjny</th>
                                 <th className="px-8 py-4 font-medium">Rok</th>
                                 <th className="px-8 py-4 font-medium">Data</th>
-                                <th className="px-8 py-4 font-medium text-right">Usluga</th>
+                                {/* <th className="px-8 py-4 font-medium text-right">Usluga</th> */}
+                                <th className="px-8 py-4 font-medium text-right">Status</th>
+
                                 <th className="px-8 py-4 font-medium"></th> 
                             </tr>
                         </thead>

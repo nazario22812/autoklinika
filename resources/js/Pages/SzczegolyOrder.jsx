@@ -109,6 +109,7 @@ function MainContent({ zamowienie }) {
         if (status === 'wtrakcie') return 'bg-orange-200 text-orange-600 ';
         if (status === 'gotowe') return 'bg-green-200 text-green-600';
         if (status === 'oplacone') return 'bg-gray-800 text-gray-100';
+        if (status === 'anulowane') return 'bg-gray-300 text-gray-500 line-through';
         return 'bg-gray-200 text-gray-600';
     }
     return (
