@@ -68,7 +68,7 @@ function Header({ auth }) {
     );
 }
 
-function MainContent({ userCount, zamowieniaCount } ){
+function MainContent({ userCount, zamowieniaCount, ostatnieZamowienia } ){
     return (
         <div className="overflow-hidden min-h-screen bg-gradient-to-b from-[#F1511A] to-[#FFAA01]">
             <div className='w-[90%] h-[80vh] bg-gray-200 mx-auto rounded-2xl mt-10 shadow-xl'>
@@ -89,10 +89,14 @@ function MainContent({ userCount, zamowieniaCount } ){
                         </div>
                     </Link>
                     
-                    <div className='rounded-2xl bg-gray-300 shadow-xl border-r-8 border-orange-500 hover:bg-gray-700 hover:text-orange-500 hover:shadow-md hover:cursor-pointer'>
-                        <p className='text-3xl mt-10 items-center font-mono text-center justify-center'>Lista użytkowników</p>
+                    <Link href='/admin/active-orders' className='rounded-2xl bg-gray-300 shadow-xl border-r-8 border-orange-500 hover:bg-gray-700 hover:text-orange-500 hover:shadow-md hover:cursor-pointer'>
+                        <div>
+                            <p className='text-3xl mt-10 items-center font-mono text-center justify-center'>Lista aktywnych zamówień</p>
+                            <p className='pt-5 text-gray-600 text-center'>Zarządzaj swoimi zamówieniami</p>
+                            <p className='text-orange-500 font-bold text-center'>Ostatnie zamówienie: {ostatnieZamowienia ? `${ostatnieZamowienia.marka} ${ostatnieZamowienia.model} (${ostatnieZamowienia.numer_rejestracyjny})` : 'Brak aktywnych zamówień'}</p>
 
-                    </div >
+                        </div>
+                    </Link>
                     <div className='rounded-2xl bg-gray-300 shadow-xl border-r-8 border-orange-500 hover:bg-gray-700 hover:text-orange-500 hover:shadow-md hover:cursor-pointer'>
                         <p className='text-3xl mt-10 items-center font-mono text-center justify-center'>Lista użytkowników</p>
 
@@ -114,13 +118,13 @@ function MainContent({ userCount, zamowieniaCount } ){
     );
 }
 
-export default function Main({ auth, userCount, zamowieniaCount }) {
+export default function Main({ auth, userCount, zamowieniaCount, ostatnieZamowienia }) {
     return (
         <div className="h-screen overflow-hidden flex flex-col">
             <Head title="Dashboard" />
             <Header auth={auth} />
             <div className="flex-grow">
-                <MainContent userCount={userCount} zamowieniaCount={zamowieniaCount} />
+                <MainContent userCount={userCount} zamowieniaCount={zamowieniaCount} ostatnieZamowienia={ostatnieZamowienia} />
             </div>
         </div>
         // <>

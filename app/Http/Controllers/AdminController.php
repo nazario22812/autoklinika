@@ -24,9 +24,11 @@ class AdminController extends Controller
     public function counts(){
         $userCount = User::latest()->count();
         $zamowieniaCount = Wizyta::latest()->count();
+        $ostatnieZamowienia = Wizyta::where('mechanik_id', Auth::id())->where('status', '!=', 'anulowane')->where('status', '!=', 'oplacone')->latest()->first();
         return Inertia::render('Admin/Dashboard', [
             'userCount' => $userCount,
-            'zamowieniaCount' => $zamowieniaCount
+            'zamowieniaCount' => $zamowieniaCount,
+            'ostatnieZamowienia' => $ostatnieZamowienia
         ]);
     }
     public function getallusers(){
@@ -36,6 +38,13 @@ class AdminController extends Controller
             'uzytkowniki' => $usery 
         ]);
 
+    }
+
+    public function getactiveorders(){
+        $zamowienia = Wizyta::where('mechanik_id', Auth::id())->latest()->get();
+        return Inertia::render('Admin/ActiveOrderList', [
+            'zamowienia' => $zamowienia
+        ]);
     }
 
     public function getallorders(){
