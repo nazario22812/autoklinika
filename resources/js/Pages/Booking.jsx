@@ -126,6 +126,13 @@ function MainContent() {
         e.preventDefault();
         post(route('wizyta.store'));
     };
+
+    const dostepneGodziny = [
+        "08:00", "08:30", "09:00", "09:30", "10:00", "10:30", 
+        "11:00", "11:30", "12:00", "12:30", "13:00", "13:30", 
+        "14:00", "14:30", "15:00", "15:30", "16:00", "16:30",
+        "17:00", "17:30", "18:00", "18:30", "19:00", "19:30", "20:00"
+    ];
     return (
         <div className=" overflow-hidden min-h-screen bg-gradient-to-b from-[#F1511A] to-[#FFAA01]">
             <div className='w-3/5 h-[80vh] bg-gray-200 mx-auto rounded-2xl'>
@@ -265,16 +272,21 @@ function MainContent() {
                                         </div>
                                         <div>
                                             <InputLabel htmlFor="godzina" value="Godzina" />
-                                            <TextInput
-
-                                                id="godzina"    
-                                                type="time"
-                                                className="mt-1 block w-[60%]"
+                                            <select
+                                                id="godzina"
+                                                className="mt-1 block w-[60%] rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
                                                 value={data.godzina}
                                                 onChange={(e) => setData('godzina', e.target.value)}
                                                 required
-                                                isFocused
-                                            />
+                                            >
+                                                <option value="" disabled>09:00</option>
+                                                {dostepneGodziny.map((godz) => (
+                                                    <option key={godz} value={godz}>
+                                                        {godz}
+                                                    </option>
+                                                ))}
+                                            </select>
+                                            <InputError message={errors.godzina} className="mt-2 text-red-600 font-bold" />                                        
                                         </div>
                                         
                                     </div>

@@ -7,6 +7,7 @@ use App\Models\User;
 use App\Models\Wizyta;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class AdminController extends Controller
 {
@@ -25,7 +26,11 @@ class AdminController extends Controller
         $userCount = User::latest()->count();
         $zamowieniaCount = Wizyta::latest()->count();
         $ostatnieZamowienia = Wizyta::where('mechanik_id', Auth::id())->where('status', '!=', 'anulowane')->where('status', '!=', 'oplacone')->latest()->first();
+        $dzisiejszeWizytyCount = Wizyta::where('data_wizyty', Carbon::today()->format('Y-m-d'))
+                                   ->where('status', '!=', 'anulowane') // не рахуємо скасовані
+                                   ->count();
         return Inertia::render('Admin/Dashboard', [
+            'dzisiejszeWizytyCount' => $dzisiejszeWizytyCount,
             'userCount' => $userCount,
             'zamowieniaCount' => $zamowieniaCount,
             'ostatnieZamowienia' => $ostatnieZamowienia
@@ -38,6 +43,28 @@ class AdminController extends Controller
             'uzytkowniki' => $usery 
         ]);
 
+    }
+
+    public function harmonogram(){
+        $wizyty = Wizyta::where('status', '!=', 'anulowane')->get();
+
+        // Перетворюємо їх для календаря
+        $events = $wizyty->map(function($w) {
+            return [
+                'id' => $w->_id, // Для MongoDB
+                'title' => $w->marka . ' ' . $w->model . ' (' . $w->usluga . ')',
+            // Формуємо дату і час у стандарті ISO: "YYYY-MM-DDTHH:mm:00"
+                'start' => $w->data_wizyty . 'T' . $w->godzina_wizyty,
+            // Додаємо посилання, щоб при кліку відкривались деталі!
+                'url' => route('admin.activeorders.detail', $w->_id), 
+            // Робимо різні кольори залежно від статусу
+                'color' => $w->status === 'gotowe' ? '#10b981' : ($w->status === 'oplacone' ? '#1f2937' : '#F1511A'),
+            ];
+        });
+
+        return Inertia::render('Admin/Calendar', [
+            'events' => $events
+        ]);
     }
 
     public function updatezamowienie(Request $request, $id)

@@ -68,7 +68,7 @@ function Header({ auth }) {
     );
 }
 
-function MainContent({ userCount, zamowieniaCount, ostatnieZamowienia } ){
+function MainContent({ userCount, zamowieniaCount, ostatnieZamowienia, dzisiejszeWizytyCount } ){
     return (
         <div className="overflow-hidden min-h-screen bg-gradient-to-b from-[#F1511A] to-[#FFAA01]">
             <div className='w-[90%] h-[80vh] bg-gray-200 mx-auto rounded-2xl mt-10 shadow-xl'>
@@ -97,10 +97,11 @@ function MainContent({ userCount, zamowieniaCount, ostatnieZamowienia } ){
 
                         </div>
                     </Link>
-                    <div className='rounded-2xl bg-gray-300 shadow-xl border-r-8 border-orange-500 hover:bg-gray-700 hover:text-orange-500 hover:shadow-md hover:cursor-pointer'>
-                        <p className='text-3xl mt-10 items-center font-mono text-center justify-center'>Lista użytkowników</p>
-
-                    </div>
+                    <Link href='/admin/calendar' className='rounded-2xl bg-gray-300 shadow-xl border-r-8 border-orange-500 hover:bg-gray-700 hover:text-orange-500 hover:shadow-md hover:cursor-pointer'>
+                        <p className='text-3xl mt-10 items-center font-mono text-center justify-center'>Kalendarz wizyt</p>
+                        <p className='pt-5 text-gray-600 text-center'>Harmonogram pracy warsztatu</p>
+                        <p className='text-orange-500 font-bold text-center'>Dzisiejsze wizyty: {dzisiejszeWizytyCount}</p>
+                    </Link>
                     <div className='rounded-2xl bg-gray-300 shadow-xl border-r-8 border-orange-500 hover:bg-gray-700 hover:text-orange-500 hover:shadow-md hover:cursor-pointer'>
                         <p className='text-3xl mt-10 items-center font-mono text-center justify-center'>Lista użytkowników</p>
 
@@ -118,13 +119,13 @@ function MainContent({ userCount, zamowieniaCount, ostatnieZamowienia } ){
     );
 }
 
-export default function Main({ auth, userCount, zamowieniaCount, ostatnieZamowienia }) {
+export default function Main({ auth, userCount, zamowieniaCount, ostatnieZamowienia, dzisiejszeWizytyCount }) {
     return (
         <div className="h-screen overflow-hidden flex flex-col">
             <Head title="Dashboard" />
             <Header auth={auth} />
             <div className="flex-grow">
-                <MainContent userCount={userCount} zamowieniaCount={zamowieniaCount} ostatnieZamowienia={ostatnieZamowienia} />
+                <MainContent userCount={userCount} zamowieniaCount={zamowieniaCount} ostatnieZamowienia={ostatnieZamowienia} dzisiejszeWizytyCount={dzisiejszeWizytyCount} />
             </div>
         </div>
         // <>

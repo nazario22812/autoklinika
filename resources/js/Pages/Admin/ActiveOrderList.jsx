@@ -14,7 +14,7 @@ function Header({ auth }) {
                     <div className="flex">
                         <div className="shrink-0 flex items-center">
                             <Link href="/"><ApplicationLogo className="block h-10 w-10 fill-current text-gray-900" /></Link>
-                            <h2 className="ml-4 text-xl font-semibold leading-tight text-gray-800">Użytkownicy</h2>
+                            <h2 className="ml-4 text-xl font-semibold leading-tight text-gray-800">Aktywne zamówienia</h2>
                         </div>
                     </div>
                     <div className='flex items-center'>
@@ -126,7 +126,7 @@ function MainContent({ auth, zamowienia }) {
                             </svg>
                             Wróć
                         </Link>
-                    </div>
+                </div>
 
                 <div className="text-center mb-12 border-b border-gray-300 pb-6">
                     <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl leading-tight">

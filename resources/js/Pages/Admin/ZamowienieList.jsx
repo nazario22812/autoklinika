@@ -14,7 +14,7 @@ function Header({ auth }) {
                     <div className="flex">
                         <div className="shrink-0 flex items-center">
                             <Link href="/"><ApplicationLogo className="block h-10 w-10 fill-current text-gray-900" /></Link>
-                            <h2 className="ml-4 text-xl font-semibold leading-tight text-gray-800">Użytkownicy</h2>
+                            <h2 className="ml-4 text-xl font-semibold leading-tight text-gray-800">Zamowienia</h2>
                         </div>
                     </div>
                     <div className='flex items-center'>
@@ -141,7 +141,7 @@ function OrderRow({ zamowienie }) {
                     {new Date(user.created_at).toLocaleDateString('pl-PL')}
                 </td>  */}
                 {
-                    zamowienie.status != 'anulowane' &&(
+                    zamowienie.status != 'anulowane' && zamowienie.status != 'oplacone' && (
                         <td className="px-8 py-5 text-right">
                             <button 
                                 onClick={() => setIsOpen(!isOpen)}

@@ -30,35 +30,32 @@ class WizytaController extends Controller
      */
     public function store(Request $request)
     {
-        // 'marka',
-        // 'model',
-        // 'rok_produkcji',
-        // 'numer_rejestracyjny',
-        // 'usluga',
-        // 'opis',
-        // 'data_wizyty',
-        // 'godzina_wizyty',
-        // 'status',
-        // 'user_id',
-
         $request->validate([
             'marka' => 'required|string|max:50',
             'model' => 'required|string|max:50',
             'rok_produkcji' => 'required|digits:4', 
             'numer_rejestracyjny' => 'required|string|max:20', 
-            //'usluga' => 'required|string|max:100',
-            //'opis' => 'nullable|string|max:255',
-            //'data_wizyty' => 'required|date',
-            //'godzina_wizyty' => 'required|time',
+            'uslugi' => 'required|string', 
+            'data' => 'required|date',      
+            'godzina' => 'required',        
         ]);
 
-        
+        $czyZajete = Wizyta::where('data_wizyty', $request->data)
+                       ->where('godzina_wizyty', $request->godzina)
+                       ->where('status', '!=', 'anulowane') // Скасовані не рахуємо
+                       ->exists();
+
+        if ($czyZajete) {
+            return back()->withErrors([
+            'godzina' => 'Niestety, ta godzina jest już zajęta. Prosimy wybrać ińszą.'
+            ]);
+        }
 
         $wizyta = Wizyta::create([
             'marka' => $request->marka,
             'model' => $request->model,
             'rok_produkcji' => $request->rok_produkcji,
-            'numer_rejestracyjny' =>strtoupper($request->numer_rejestracyjny),
+            'numer_rejestracyjny' => strtoupper($request->numer_rejestracyjny),
             'usluga' => $request->uslugi,
             'opis' => $request->opis,
             'data_wizyty' => $request->data,
@@ -69,9 +66,7 @@ class WizytaController extends Controller
             'cena' => null,
         ]);
 
-
-
-        return redirect()->route('check-order');
+        return redirect()->route('check-order')->with('success', 'Wizyta została zarezerwowana!');
     }
 
     /**
