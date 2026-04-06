@@ -59,7 +59,8 @@ Route::middleware(['auth'])->group(function () {
         Route::post('admin/zamowienia/anuluj/{id}', [AdminController::class, 'anulowanie'])->name('admin.zamowienia.anuluj');
         Route::post('admin/zamowienia/wziaczamowienie/{id}', [AdminController::class, 'wziaczamowienie'])->name('admin.zamowienia.wziaczamowienie');
         Route::get('admin/active-orders', [AdminController::class, 'getactiveorders'])->name('admin.activeorders');
-        
+        Route::get('admin/active-orders/{id}', [AdminController::class, 'getactiveorderdetail'])->name('admin.activeorders.detail');
+        Route::post('admin/active-orders/{id}', [AdminController::class, 'updatezamowienie'])->name('admin.zamowienie.update');
     });
 
 

@@ -95,6 +95,7 @@ function OrderRow({ zamowienie }) {
 
                 <td className="px-8 py-5 text-right">
                     <button 
+                        onClick={() => router.get(route('admin.activeorders.detail', zamowienie.id))}
                         // onClick={() => setIsOpen(!isOpen)}
                         className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg text-sm font-semibold text-orange-500 hover:bg-orange-100 transition-colors focus:outline-none"
                     >
@@ -104,34 +105,7 @@ function OrderRow({ zamowienie }) {
                 </td>
             </tr>
 
-            <tr>
-                <td colSpan="5" className="p-0 border-0">
-                    <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[1000px] opacity-100 border-b border-gray-300' : 'max-h-0 opacity-0'}`}>
-                        
-                        <div className="grid grid-cols-2 px-8 py-6 bg-gray-50 flex items-center justify-between">
-                            <div>
-                                <p className="text-sm text-gray-500 font-semibold mb-1">Dodatkowe informacje</p>
-                                {/* <p className="text-gray-800">Numer telefonu: <span className="font-mono">{user.phone_number}</span></p> */}
-                            </div>
-
-                            <div className='text-right pr-10'>
-                                <p className="text-sm text-gray-500 font-semibold mb-1">Rola użytkownika</p>
-                                {/* {user.is_admin ? (
-                                    <button onClick={() => router.post(route('admin.updateRole'), { user_id: user.id })} className="px-3 py-1.5 rounded-lg text-sm font-semibold text-green-700 bg-green-100 active:bg-green-300 hover:bg-green-200 transition-colors">
-                                        Zrobić klientem
-                                    </button>
-                                    
-                                ):(
-                                    <button onClick={() => router.post(route('admin.updateRole'), { user_id: user.id })} className="px-3 py-1.5 rounded-lg text-sm font-semibold text-purple-700 bg-purple-100 active:bg-purple-300 hover:bg-purple-200 transition-colors">
-                                        Zrobić administoratorem
-                                    </button>
-                                )} */}
-                            </div>
-                        </div>
-
-                    </div>
-                </td>
-            </tr>
+            
         </>
     );
 }

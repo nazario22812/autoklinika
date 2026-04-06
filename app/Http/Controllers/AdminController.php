@@ -40,10 +40,31 @@ class AdminController extends Controller
 
     }
 
+    public function updatezamowienie(Request $request, $id)
+    {
+        $zamowienie = Wizyta::find($id); 
+
+        if ($zamowienie) {
+            $zamowienie->status = $request->status;
+            $zamowienie->cena = $request->cena;
+            $zamowienie->komentarz_mechanika = $request->komentarz_mechanika;
+            $zamowienie->save();
+        }
+
+        return back()->with('success', 'Zmiany zostały zapisane!');
+    }
+
     public function getactiveorders(){
-        $zamowienia = Wizyta::where('mechanik_id', Auth::id())->latest()->get();
+        $zamowienia = Wizyta::where('mechanik_id', Auth::id())->where('status', '!=', 'oplacone')->latest()->get();
         return Inertia::render('Admin/ActiveOrderList', [
             'zamowienia' => $zamowienia
+        ]);
+    }
+
+    public function getactiveorderdetail($zamowienie_id){
+        $zamowienie = Wizyta::find($zamowienie_id);
+        return Inertia::render('Admin/ActiveOrderDetail', [
+            'zamowienie' => $zamowienie
         ]);
     }
 
