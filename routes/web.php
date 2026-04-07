@@ -89,13 +89,17 @@ Route::middleware(['auth'])->group(function () {
     Route::get('/check-order', [UsersController::class, 'index'])->name('check-order');
     Route::get('/check-order/{id}', [UsersController::class, 'szczegoly'])->name('szczegoly');
 
-    Route::get('/faq', function () {
-        return Inertia::render('FAQ');
-    })->name('faq');
+    // Route::get('/faq', function () {
+    //     return Inertia::render('FAQ');
+    // })->name('faq');
 
     Route::get('/booking', function () {
         return Inertia::render('Booking');
     })->name('wizyta');    
     Route::post('/booking', [WizytaController::class, 'store'])->name('wizyta.store');
+
+    Route::get('/faq', [UsersController::class, 'faq'])->name('faq');
+    Route::get('/faq/zadaj-pytanie', [UsersController::class, 'zadajpytanie'])->name('faq.zadaj-pytanie');
+    Route::post('/faq/zadaj-pytanie', [UsersController::class, 'wyslijpytanie'])->name('faq.wyslij-pytanie');
 });
 

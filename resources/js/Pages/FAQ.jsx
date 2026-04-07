@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
-import { Link, Head } from '@inertiajs/react';
+import { Link, Head, router } from '@inertiajs/react';
 
 const faqData = [
     {
@@ -178,7 +178,7 @@ function MainContent() {
 
                 <div className='flex justify-between w-full mt-12 px-6 py-8 border-t border-gray-300'>
                     <div className='flex items-center'><span className='text-gray-500 font-medium italic'>email: autoklinika_faq@gmail.com</span></div>
-                    <div className='flex items-center'><span className='text-gray-500 font-medium italic'>telefon: +48 123 456 789</span></div>
+                    <Link href={route('faq.zadaj-pytanie')} className='flex items-center text-blue-500 font-medium italic underline'>zadaj nam pytanie</Link>
                 </div>
             </div>
         </div>

@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Wizyta;
+use App\Models\Pytanie;
 use Illuminate\Validation\Rules\In;
 use Inertia\Inertia;
 class UsersController extends Controller
@@ -16,6 +17,35 @@ class UsersController extends Controller
      */
 
     
+
+    public function zadajpytanie()
+    {
+        $mojepytania = Pytanie::where('user_id', Auth::id())->get();
+        return Inertia::render('Questions', [
+            'mojePytania' => $mojepytania
+        ]);
+    }
+
+    public function wyslijpytanie(Request $request){
+        $request->validate([
+            'temat' => 'required|string|max:255',
+            'tresc' => 'required|string',
+        ]);
+
+        Pytanie::create([
+            'temat' => $request->temat,
+            'tresc' => $request->tresc,
+            'user_id' => Auth::id(),
+            'status' => 'oczekujące'
+        ]);
+
+        return redirect()->route('faq.zadaj-pytanie')->with('success', 'Twoje pytanie zostało wysłane!');
+
+    }
+
+    public function faq(){
+        return Inertia::render('FAQ');
+    }
 
     public function index()
     {

@@ -46,7 +46,7 @@ class AdminController extends Controller
     }
 
     public function harmonogram(){
-        $wizyty = Wizyta::where('status', '!=', 'anulowane')->get();
+        $wizyty = Wizyta::where('status', '!=', 'anulowane')->where('status', '!=', 'oplacone')->where('mechanik_id', Auth::id())->get();
 
         // Перетворюємо їх для календаря
         $events = $wizyty->map(function($w) {

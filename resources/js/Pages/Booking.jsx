@@ -249,7 +249,7 @@ function MainContent() {
                                         <InputLabel htmlFor="opis" value="Opis problemu" />
                                         <textarea
                                             id="opis"
-                                            className="mt-1 h-[135px] block w-[80%] rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
+                                            className="mt-1 h-[135px] block w-[80%] rounded-md border-gray-300 focus:border-indigo-500 focus:ring-indigo-500"
                                             placeholder="Dodatkowe informacje..."
                                             value={data.opis}
                                             onChange={(e) => setData('opis', e.target.value)}
