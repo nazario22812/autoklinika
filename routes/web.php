@@ -62,6 +62,8 @@ Route::middleware(['auth'])->group(function () {
         Route::get('admin/active-orders/{id}', [AdminController::class, 'getactiveorderdetail'])->name('admin.activeorders.detail');
         Route::post('admin/active-orders/{id}', [AdminController::class, 'updatezamowienie'])->name('admin.zamowienie.update');
         Route::get('admin/calendar', [AdminController::class, 'harmonogram'])->name('admin.calendar');
+        Route::get('admin/pytania', [AdminController::class, 'getallquestions'])->name('admin.questions');
+        Route::post('admin/pytania/{id}', [AdminController::class, 'wyslijodpowiedz'])->name('admin.wyslij-odpowiedz');
     });
 
 

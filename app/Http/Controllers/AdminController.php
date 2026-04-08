@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\User;
 use App\Models\Wizyta;
+use App\Models\Pytanie;
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -29,13 +30,35 @@ class AdminController extends Controller
         $dzisiejszeWizytyCount = Wizyta::where('data_wizyty', Carbon::today()->format('Y-m-d'))
                                    ->where('status', '!=', 'anulowane') // не рахуємо скасовані
                                    ->count();
+
+        $pytaniaCount = Pytanie::where('status', 'oczekujące')->latest()->count();
         return Inertia::render('Admin/Dashboard', [
             'dzisiejszeWizytyCount' => $dzisiejszeWizytyCount,
             'userCount' => $userCount,
             'zamowieniaCount' => $zamowieniaCount,
-            'ostatnieZamowienia' => $ostatnieZamowienia
+            'ostatnieZamowienia' => $ostatnieZamowienia,
+            'pytaniaCount' => $pytaniaCount
         ]);
     }
+
+    public function getallquestions(){
+        $questions = Pytanie::latest()->get();
+        return Inertia::render('Admin/QuestionList', [
+            'questions' => $questions
+        ]);
+    }
+
+    public function wyslijodpowiedz(Request $request, $id){
+        $pytanie = Pytanie::find($id);
+        if ($pytanie) {
+            $pytanie->odpowiedz = $request->odpowiedz;
+            $pytanie->status = 'odpowiedziane';
+            $pytanie->mechanik_id = Auth::id();
+            $pytanie->save();
+        }
+        return redirect()->route('admin.questions')->with('success', 'Odpowiedź została wysłana!');
+    }
+
     public function getallusers(){
         $usery = User::latest()->get();
 
