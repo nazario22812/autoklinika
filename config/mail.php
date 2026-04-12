@@ -14,7 +14,7 @@ return [
     |
     */
 
-    'default' => env('MAIL_MAILER', 'log'),
+    'default' => env('MAIL_MAILER', 'roundrobin'),
 
     /*
     |--------------------------------------------------------------------------
@@ -37,6 +37,19 @@ return [
 
     'mailers' => [
 
+        'mailgun' => [
+            'transport' => 'mailgun',
+        ],
+
+        'postmark' => [
+            'key' => env('POSTMARK_API_KEY'),
+            'message_stream_id' => env('POSTMARK_MESSAGE_STREAM_ID'),
+
+        ],
+
+        'resend' => [
+            'key' => env('RESEND_API_KEY'),
+        ],
         'smtp' => [
             'transport' => 'smtp',
             'scheme' => env('MAIL_SCHEME'),
@@ -84,6 +97,8 @@ return [
             'mailers' => [
                 'smtp',
                 'log',
+                'postmark',
+                'mailgun',
             ],
             'retry_after' => 60,
         ],
@@ -93,6 +108,8 @@ return [
             'mailers' => [
                 'ses',
                 'postmark',
+                'postmark',
+                'mailgun',
             ],
             'retry_after' => 60,
         ],
@@ -111,8 +128,8 @@ return [
     */
 
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'hello@example.com'),
-        'name' => env('MAIL_FROM_NAME', 'Example'),
+        'address' => env('MAIL_FROM_ADDRESS', 's101737@pollub.edu.pl'),
+        'name' => env('MAIL_FROM_NAME', 'Autoklinika'),
     ],
 
 ];

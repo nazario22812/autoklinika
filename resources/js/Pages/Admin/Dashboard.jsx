@@ -72,7 +72,7 @@ function MainContent({ userCount, zamowieniaCount, ostatnieZamowienia, dzisiejsz
     return (
         <div className="overflow-hidden min-h-screen bg-gradient-to-b from-[#F1511A] to-[#FFAA01]">
             <div className='w-[90%] h-[80vh] bg-gray-200 mx-auto rounded-2xl mt-10 shadow-xl'>
-                <div className="grid grid-cols-3 grid-rows-2 gap-12 py-10 h-full flex flex-col relative px-20">
+                <div className=" grid grid-cols-3 grid-rows-2 gap-12 py-10 h-full flex flex-col relative px-20">
                     <Link href='/admin/user-list' className=' rounded-2xl bg-gray-300 shadow-xl border-r-8 border-orange-500 hover:bg-gray-700 hover:text-orange-500 hover:shadow-md hover:cursor-pointer'>
                         <div> 
                             <p className='text-3xl mt-10 items-center font-mono text-center justify-center'>Lista użytkowników</p>

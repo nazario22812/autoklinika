@@ -27,6 +27,28 @@ export default function Register() {
         });
     };
 
+    const formatPhoneNumber = (value) => {
+    const digits = value.replace(/\D/g, ''); 
+
+    
+    let formatted = '';
+
+    if (digits.length > 0) {
+        formatted += '+' + digits.substring(0, 2); 
+    }
+    if (digits.length > 2) {
+        formatted += ' ' + digits.substring(2, 5); 
+    }
+    if (digits.length > 5) {
+        formatted += ' ' + digits.substring(5, 8); 
+    }
+    if (digits.length > 8) {
+        formatted += ' ' + digits.substring(8, 11); 
+    }
+
+    return formatted;
+};
+
     return (
         
         <GuestLayout>
@@ -79,7 +101,15 @@ export default function Register() {
                         autoComplete="phone_number"
                         placeholder="+48 ___ ___ ___"
                         isFocused={true}
-                        onChange={(e) => setData('phone_number', e.target.value)}
+                        onChange={(e) => {
+                            
+                                const formatted = formatPhoneNumber(e.target.value);
+                                if (formatted.length <= 15) {
+                                    setData('phone_number', formatted);
+                                }
+                            }
+                            
+                        }
                         required
                     />
                 </div>

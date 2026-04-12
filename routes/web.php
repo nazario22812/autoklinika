@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\WizytaController;
+use App\Http\Controllers\Auth\PasswordController;
 
 // --- 1. ГОЛОВНА СТОРІНКА ---
 Route::get('/', function () {
@@ -35,10 +36,21 @@ Route::middleware('guest')->group(function () {
     })->name('register');
     Route::post('/register', [RegisteredUserController::class, 'store'])->name('register.store');
 
+
+
+
+    Route::get('/forgot-password', [AuthenticatedSessionController::class, 'forgotPassword'])->name('password.request');
+    Route::post('/forgot-password', [PasswordController::class, 'generateResetCode'])->name('password.gencode');
+    Route::get('/forgot-password/code', [PasswordController::class, 'codeforgotPassword'])->name('password.code');
+    Route::post('/forgot-password/code', [PasswordController::class, 'verifyCode'])->name('password.verifycode');
+    Route::get('/reset-password', function () {
+        return Inertia::render('Auth/ResetPassword');
+    })->name('password.reset');
+    Route::post('/reset-password', [PasswordController::class, 'update'])->name('password.update');
     // Відновлення пароля
-    Route::get('/forgot-password', function () {
-        return Inertia::render('Auth/ForgotPassword');
-    })->name('password.request');
+    // Route::get('/forgot-password', function () {
+    //     return Inertia::render('Auth/ForgotPassword');
+    // })->name('password.request');
 });
 
 

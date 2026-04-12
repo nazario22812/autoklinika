@@ -23,6 +23,14 @@ class AuthenticatedSessionController extends Controller
             'status' => session('status'),
         ]);
     }
+    public function forgotPassword() : Response
+    {
+        return Inertia::render('Auth/ForgotPassword', [
+            // 'canResetPassword' => Route::has('password.request'),
+            'status' => session('status'),
+        ]);
+
+    }
 
     /**
      * Handle an incoming authentication request.

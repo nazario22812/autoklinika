@@ -3,7 +3,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import GuestLayout from '@/Layouts/GuestLayout';
-import { Head, useForm } from '@inertiajs/react';
+import { Link,  Head, useForm } from '@inertiajs/react';
 
 export default function ResetPassword({ token, email }) {
     const { data, setData, post, processing, errors, reset } = useForm({
@@ -16,7 +16,7 @@ export default function ResetPassword({ token, email }) {
     const submit = (e) => {
         e.preventDefault();
 
-        post(route('password.store'), {
+        post(route('password.update'), {
             onFinish: () => reset('password', 'password_confirmation'),
         });
     };
@@ -26,7 +26,7 @@ export default function ResetPassword({ token, email }) {
             <Head title="Reset Password" />
 
             <form onSubmit={submit}>
-                <div>
+                {/* <div>
                     <InputLabel htmlFor="email" value="Email" />
 
                     <TextInput
@@ -40,7 +40,7 @@ export default function ResetPassword({ token, email }) {
                     />
 
                     <InputError message={errors.email} className="mt-2" />
-                </div>
+                </div> */}
 
                 <div className="mt-4">
                     <InputLabel htmlFor="password" value="Password" />
@@ -83,7 +83,16 @@ export default function ResetPassword({ token, email }) {
                     />
                 </div>
 
-                <div className="mt-4 flex items-center justify-end">
+                <div className="grid grid-cols-2 mt-4 flex items-center justify-end">
+                    <Link 
+                        href={route('password.code')} 
+                        className="group inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-[#F1511A] transition-colors duration-200"
+                    >
+                        <svg className="w-5 h-5 transition-transform duration-200 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+                        </svg>
+                        Wróć
+                    </Link>
                     <PrimaryButton className="ms-4" disabled={processing}>
                         Reset Password
                     </PrimaryButton>

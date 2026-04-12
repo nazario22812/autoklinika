@@ -193,7 +193,7 @@ function MainContent({ auth , questions }) {
                             </svg>
                             Wróć
                         </Link>
-                    </div>
+                </div>
 
                 <div className="text-center mb-12 border-b border-gray-300 pb-6">
                     <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl leading-tight">
