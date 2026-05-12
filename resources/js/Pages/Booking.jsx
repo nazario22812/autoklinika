@@ -8,7 +8,7 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
-
+import { ToastContainer, toast } from 'react-toastify';
 function Header({ auth }) {
     
     return (
@@ -334,9 +334,10 @@ function MainContent() {
                         </div>
                     </div>
                     <div className="px-10">
-                        <PrimaryButton  className='' disabled={processing} >
+                        <PrimaryButton  className='' disabled={processing}  >
                             Potwierdź rezerwację
                         </PrimaryButton>
+                       
                     </div>
                 </form>
             </div>

@@ -76,7 +76,7 @@ function MainContent() {
                     <div className="flex items-center justify-center ">
                         <img 
                             className="w-full h-full rounded-xl shadow-md object-cover object-center sm:shrink-0"
-                            src="https://th.bing.com/th/id/OIG2.R74b7Phd69gr0TpTGKvN?r=0&o=5&pid=ImgGn"
+                            src="https://th.bing.com/th/id/OIG1.nHpXwQwCbUFVzMZljy15?r=0&o=5&pid=ImgGn"
                             alt="Mechanic at work"
                         />
                     </div>
