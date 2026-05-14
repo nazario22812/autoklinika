@@ -51,7 +51,7 @@ class UsersController extends Controller
     {
         //
 
-        $wizyty = Wizyta::where('user_id', Auth::id())->get();
+        $wizyty = Wizyta::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
 
         return Inertia::render('CheckOrder', [
             'mojeWizyty' => $wizyty 
