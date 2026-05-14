@@ -20,7 +20,7 @@ class UsersController extends Controller
 
     public function zadajpytanie()
     {
-        $mojepytania = Pytanie::where('user_id', Auth::id())->get();
+        $mojepytania = Pytanie::where('user_id', Auth::id())->orderBy('created_at', 'desc')->get();
         return Inertia::render('Questions', [
             'mojePytania' => $mojepytania
         ]);
