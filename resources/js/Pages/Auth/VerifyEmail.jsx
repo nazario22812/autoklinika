@@ -30,8 +30,8 @@ export default function VerifyEmail({ status }) {
             )}
 
             <form onSubmit={submit}>
-                <div className="mt-4 flex items-center justify-between">
-                    <PrimaryButton disabled={processing}>
+                <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                    <PrimaryButton className="order-1 sm:order-1" disabled={processing}>
                         Resend Verification Email
                     </PrimaryButton>
 
@@ -39,7 +39,7 @@ export default function VerifyEmail({ status }) {
                         href={route('logout')}
                         method="post"
                         as="button"
-                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="order-2 sm:order-2 rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                     >
                         Log Out
                     </Link>

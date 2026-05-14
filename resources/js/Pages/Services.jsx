@@ -3,6 +3,7 @@ import ApplicationLogo from '@/Components/ApplicationLogo';
 import NavLink from '@/Components/NavLink';
 import Dropdown from '@/Components/Dropdown';
 import { Link, Head } from '@inertiajs/react';
+import ResponsiveNav from '@/Components/ResponsiveNav';
 
 const servicesData = [
     {
@@ -135,83 +136,6 @@ const servicesData = [
     }
 ];
 
-function Header({ auth }) {
-    return (
-        <nav className="bg-white border-b border-gray-200">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-16">
-                    <div className="flex">
-                        <div className="shrink-0 flex items-center">
-                            <Link href="/">
-                                <ApplicationLogo className="block h-10 w-10 fill-current text-gray-900" />
-                            </Link>
-                            <h2 className="ml-4 text-xl font-semibold leading-tight text-gray-800">
-                                Nasze usługi
-                            </h2>
-                        </div>
-                    </div>
-                    <div className='flex items-center'>
-                        <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center">
-                            <Link href="/booking" className="text-sm font-medium text-gray-700 ml-5 mr-5 ">
-                                Rezerwacja
-                            </Link>
-                        </div>
-                        <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center border-b-[3px] border-gray-900 bg-gray-100">
-                            <Link href="/services" className="text-sm font-medium text-gray-700 ml-5 mr-5 ">
-                                Usługi
-                            </Link>
-                        </div>
-                        
-
-                        <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center">
-                            <Link href="/check-order" className="text-sm font-medium text-gray-700 ml-5 mr-5">
-                                Moje zamówienia
-                            </Link>
-                        </div>
-                        
-                        <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center">
-                            <Link href="/faq" className="text-sm font-medium text-gray-700 ml-5 mr-5 ">
-                                FAQ
-                            </Link>
-                        </div>
-                        
-                        
-                    
-                    </div>
-                    <div className="hidden sm:flex sm:items-center sm:ml-2 gap-10">
-                        <Dropdown>
-                            <Dropdown.Trigger>
-                                <button className="flex items-center gap-3 px-3 py-2 transition duration-150 ease-in-out hover:opacity-80 focus:outline-none">
-                                    <span className="text-sm font-medium text-gray-700">
-                                        Cześć, {auth?.user?.name || 'Użytkowniku'}!
-                                    </span>
-                                    <img 
-                                        src="https://cdn-icons-png.flaticon.com/128/18827/18827926.png" 
-                                        className="h-10 w-10 rounded-full object-cover shadow-sm" 
-                                        alt="Avatar" 
-                                    />
-                                </button>
-                            </Dropdown.Trigger>
-                            <Dropdown.Content>
-                                <Dropdown.Link href={route('profile.edit')} className='font-semibold text-xs'>
-                                    Mój profil
-                                </Dropdown.Link>
-                                {auth?.user?.is_admin && (
-                                    <Dropdown.Link href={route('admin.dashboard')}>
-                                        Panel Admina
-                                    </Dropdown.Link>
-                                )}
-                                <Dropdown.Link className='font-semibold text-xs' href={route('logout')} method="post" as="button">
-                                    Wyjście
-                                </Dropdown.Link>
-                            </Dropdown.Content>
-                        </Dropdown>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    );
-}
 
 function AccordionServiceItem({ service }) {
     const [isOpen, setIsOpen] = useState(false);
@@ -220,15 +144,20 @@ function AccordionServiceItem({ service }) {
         <div className="border-b border-gray-300 bg-white first:rounded-t-2xl last:rounded-b-2xl last:border-b-0 overflow-hidden shadow-sm">
             <button
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex justify-between items-center px-6 py-5 focus:outline-none hover:bg-gray-50 transition-colors"
+                className="w-full flex flex-col sm:flex-row justify-between items-start sm:items-center gap-3 sm:gap-4 px-4 sm:px-6 py-4 sm:py-5 focus:outline-none hover:bg-gray-50 transition-colors"
             >
-                <div className="flex items-center gap-4">
-                    <span className="text-4xl text-orange-500 p-3 rounded-xl">{service.icon}</span>
-                    <h3 className="text-2xl font-semibold text-gray-800 leading-tight">
-                        {service.title}{} <span className="text-xl text-gray-500 ml-4">{service.price}</span>
-                    </h3>
+                <div className="flex items-center gap-3 sm:gap-4 min-w-0">
+                    <span className="text-3xl sm:text-3xl md:text-4xl text-orange-500 p-2 sm:p-3 rounded-xl shrink-0">{service.icon}</span>
+                    <div className="min-w-0">
+                        <h3 className="text-base sm:text-lg md:text-2xl font-semibold text-gray-800 leading-tight text-left">
+                            {service.title}
+                        </h3>
+                        <span className="text-sm float-left sm:text-base md:text-lg text-gray-500">
+                            {service.price}
+                        </span>
+                    </div>
                 </div>
-                <span className={`text-gray-400 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>
+                <span className={`text-gray-400 transform transition-transform duration-300 shrink-0 ${isOpen ? 'rotate-180' : ''}`}>
                     ▼
                 </span>
             </button>
@@ -237,9 +166,9 @@ function AccordionServiceItem({ service }) {
                     isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'
                 }`}
             >
-                <div className="px-6 pb-6 pt-3 text-lg text-gray-700 leading-relaxed bg-gray-50 border-t border-gray-100">
+                <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-3 text-base sm:text-lg text-gray-700 leading-relaxed bg-gray-50 border-t border-gray-100">
                     <p className="font-semibold text-gray-900 mb-3">Zakres usługi:</p>
-                    <ul className="space-y-2.5 list-disc list-outside ml-6 text-base">
+                    <ul className="space-y-2.5 list-disc list-outside ml-6 text-sm sm:text-base">
                         {service.points.map((point, index) => (
                             <li key={index}>{point}</li>
                         ))}
@@ -252,13 +181,13 @@ function AccordionServiceItem({ service }) {
 
 function MainContent() {
     return (
-        <div className="min-h-screen bg-gradient-to-b from-[#F1511A] to-[#FFAA01] py-12 px-2">
-            <div className="max-w-7xl mx-auto bg-gray-200 rounded-3xl shadow-2xl p-6 md:p-12">
-                <div className="text-center mb-12">
-                    <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl leading-tight">
+        <div className="min-h-screen bg-gradient-to-b from-[#F1511A] to-[#FFAA01] py-8 sm:py-12 px-4 sm:px-6 lg:px-8">
+            <div className="max-w-7xl mx-auto bg-gray-200 rounded-3xl shadow-2xl p-4 sm:p-8 md:p-12">
+                <div className="text-center mb-8 sm:mb-12">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
                         Pełna Oferta Usługowa Autokliniki
                     </h1>
-                    <p className="mt-5 text-xl text-gray-600 max-w-3xl mx-auto">
+                    <p className="mt-4 sm:mt-5 text-base sm:text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">
                         Poznaj szczegółowy zakres naszych profesjonalnych usług mechanicznych і diagnostycznych.
                     </p>
                 </div>
@@ -269,7 +198,7 @@ function MainContent() {
                     ))}
                 </div>
 
-                <p className="text-center text-gray-500 mt-12 italic text-sm">
+                <p className="text-center text-gray-500 mt-8 sm:mt-12 italic text-xs sm:text-sm">
                     * Podany zakres usług jest orientacyjny. Dokładny koszt і czas naprawy ustalany jest po diagnozie pojazdu.
                 </p>
             </div>
@@ -281,7 +210,8 @@ export default function Main({ auth }) {
     return (
         <div className="min-h-screen flex flex-col bg-white">
             <Head title="Usługi" />
-            <Header auth={auth} />
+            <ResponsiveNav auth={auth} pageTitle="Usługi" />
+            
             <div className="flex-grow">
                 <MainContent />
             </div>

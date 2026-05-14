@@ -83,14 +83,14 @@ export default function Login({ status, canResetPassword }) {
                     </label>
                 </div>
 
-                <div className="mt-4 flex items-center justify-end">
+                <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-end gap-2">
                    
                     <Link href="/forgot-password"
-                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
+                        className="rounded-md text-sm text-gray-600 underline hover:text-gray-900 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2 order-2 sm:order-1"
                     >
                         Forgot your password?
                     </Link>
-                    <PrimaryButton className="ms-4" disabled={processing}>
+                    <PrimaryButton className="order-1 sm:order-2 ms-0 sm:ms-4" disabled={processing}>
                         Log in
                     </PrimaryButton>
                     

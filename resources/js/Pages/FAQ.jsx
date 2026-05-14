@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import Dropdown from '@/Components/Dropdown';
+import ResponsiveNav from '@/Components/ResponsiveNav';
 import { Link, Head, router } from '@inertiajs/react';
 
 const faqData = [
@@ -67,67 +68,6 @@ const faqData = [
     }
 ];
 
-function Header({ auth }) {
-    return (
-        <nav className="bg-white border-b border-gray-200">
-            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div className="flex justify-between h-16">
-                    <div className="flex">
-                        <div className="shrink-0 flex items-center">
-                            <Link href="/"><ApplicationLogo className="block h-10 w-10 fill-current text-gray-900" /></Link>
-                            <h2 className="ml-4 text-xl font-semibold leading-tight text-gray-800">Centrum Pomocy FAQ</h2>
-                        </div>
-                    </div>
-                    <div className='flex items-center'>
-                        <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center ">
-                            <Link href="/booking" className="text-sm font-medium text-gray-700 ml-5 mr-5 ">
-                                Rezerwacja
-                            </Link>
-                        </div>
-                        <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center ">
-                            <Link href="/services" className="text-sm font-medium text-gray-700 ml-5 mr-5 ">
-                                Usługi
-                            </Link>
-                        </div>
-                                            
-                    
-                        <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center">
-                            <Link href="/check-order" className="text-sm font-medium text-gray-700 ml-5 mr-5">
-                                Moje zamówienia
-                            </Link>
-                        </div>
-                                            
-                        <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center border-b-[3px] border-gray-900 bg-gray-100">
-                            <Link href="/faq" className="text-sm font-medium text-gray-700 ml-5 mr-5 ">
-                                FAQ
-                            </Link>
-                        </div>
-                    </div>
-                    <div className="hidden sm:flex sm:items-center sm:ml-2 gap-10">
-                        <Dropdown>
-                            <Dropdown.Trigger>
-                                <button className="flex items-center gap-3 px-3 py-2 focus:outline-none">
-                                    <span className="text-sm font-medium text-gray-700">Cześć, {auth?.user?.name || 'Nazar'}!</span>
-                                    <img src="https://cdn-icons-png.flaticon.com/128/18827/18827926.png" className="h-10 w-10 rounded-full object-cover shadow-sm" alt="Avatar" />
-                                </button>
-                            </Dropdown.Trigger>
-                            <Dropdown.Content>
-                                <Dropdown.Link href={route('profile.edit')} className='font-semibold text-xs'>Mój profil</Dropdown.Link>
-                                {auth?.user?.is_admin && (
-                                    <Dropdown.Link href={route('admin.dashboard')}>
-                                        Panel Admina
-                                    </Dropdown.Link>
-                                )}
-                                <Dropdown.Link className='font-semibold text-xs' href={route('logout')} method="post" as="button">Wyjście</Dropdown.Link>
-                            </Dropdown.Content>
-                        </Dropdown>
-                    </div>
-                </div>
-            </div>
-        </nav>
-    );
-}
-
 function FAQAccordionItem({ item }) {
     const [isOpen, setIsOpen] = useState(false);
 
@@ -135,20 +75,20 @@ function FAQAccordionItem({ item }) {
         <div className="border-b border-gray-300 bg-white first:rounded-t-2xl last:rounded-b-2xl last:border-b-0 overflow-hidden shadow-sm">
             <button 
                 onClick={() => setIsOpen(!isOpen)}
-                className="w-full flex justify-between items-center px-6 py-5 focus:outline-none hover:bg-gray-50 transition-colors"
+                className="w-full flex justify-between items-center px-4 sm:px-6 py-4 sm:py-5 focus:outline-none hover:bg-gray-50 transition-colors"
             >
-                <div className="flex items-center gap-4">
-                    <span className="text-3xl text-orange-500 p-3 rounded-xl">{item.icon}</span>
-                    <h3 className="text-xl font-bold text-gray-800">{item.title}</h3>
+                <div className="flex items-center gap-3 sm:gap-4">
+                    <span className="text-2xl sm:text-3xl text-orange-500 p-2 sm:p-3 rounded-xl">{item.icon}</span>
+                    <h3 className="text-lg sm:text-xl font-bold text-gray-800">{item.title}</h3>
                 </div>
                 <span className={`text-gray-400 transform transition-transform duration-300 ${isOpen ? 'rotate-180' : ''}`}>▼</span>
             </button>
             <div className={`overflow-hidden transition-all duration-500 ease-in-out ${isOpen ? 'max-h-[1000px] opacity-100' : 'max-h-0 opacity-0'}`}>
-                <div className="px-6 pb-6 pt-2 bg-gray-50 border-t border-gray-100">
+                <div className="px-4 sm:px-6 pb-4 sm:pb-6 pt-2 bg-gray-50 border-t border-gray-100">
                     {item.content.map((qa, index) => (
-                        <div key={index} className="mt-4 first:mt-2">
-                            <p className="font-bold text-gray-900 text-lg">Q: {qa.q}</p>
-                            <p className="mt-1 text-gray-700 leading-relaxed">A: {qa.a}</p>
+                        <div key={index} className="mt-3 sm:mt-4 first:mt-2">
+                            <p className="font-bold text-gray-900 text-base sm:text-lg">Q: {qa.q}</p>
+                            <p className="mt-1 text-gray-700 leading-relaxed text-sm sm:text-base">A: {qa.a}</p>
                         </div>
                     ))}
                 </div>
@@ -159,13 +99,13 @@ function FAQAccordionItem({ item }) {
 
 function MainContent() {
     return (
-        <div className="min-h-screen bg-gradient-to-b from-[#F1511A] to-[#FFAA01] py-12 px-4">
-            <div className="max-w-7xl mx-auto bg-gray-200 rounded-3xl shadow-2xl p-6 md:p-12">
-                <div className="text-center mb-12">
-                    <h1 className="text-4xl font-extrabold text-gray-900 sm:text-5xl leading-tight">
+        <div className="min-h-screen bg-gradient-to-b from-[#F1511A] to-[#FFAA01] py-8 sm:py-12 px-4">
+            <div className="max-w-7xl mx-auto bg-gray-200 rounded-3xl shadow-2xl p-4 sm:p-6 md:p-12">
+                <div className="text-center mb-8 sm:mb-12">
+                    <h1 className="text-2xl sm:text-3xl md:text-4xl lg:text-5xl font-extrabold text-gray-900 leading-tight">
                         Najczęściej zadawane pytania
                     </h1>
-                    <p className="mt-5 text-xl text-gray-600">
+                    <p className="mt-4 sm:mt-5 text-lg sm:text-xl text-gray-600">
                         Wszystko, co musisz wiedzieć o serwisie w Autoklinice.
                     </p>
                 </div>
@@ -176,9 +116,9 @@ function MainContent() {
                     ))}
                 </div>
 
-                <div className='flex justify-between w-full mt-12 px-6 py-8 border-t border-gray-300'>
-                    <div className='flex items-center'><span className='text-gray-500 font-medium italic'>email: autoklinika_faq@gmail.com</span></div>
-                    <Link href={route('faq.zadaj-pytanie')} className='flex items-center text-blue-500 font-medium italic underline'>zadaj nam pytanie</Link>
+                <div className='flex flex-col sm:flex-row justify-between w-full mt-8 sm:mt-12 px-4 sm:px-6 py-6 sm:py-8 border-t border-gray-300 gap-4'>
+                    <div className='flex items-center'><span className='text-gray-500 font-medium italic text-sm sm:text-base'>email: autoklinika_faq@gmail.com</span></div>
+                    <Link href={route('faq.zadaj-pytanie')} className='flex items-center text-blue-500 font-medium italic underline text-sm sm:text-base'>zadaj nam pytanie</Link>
                 </div>
             </div>
         </div>
@@ -189,7 +129,7 @@ export default function FAQ({ auth }) {
     return (
         <div className="min-h-screen flex flex-col bg-white">
             <Head title="FAQ" />
-            <Header auth={auth} />
+            <ResponsiveNav auth={auth} pageTitle="Centrum Pomocy FAQ" />
             <div className="flex-grow">
                 <MainContent />
             </div>

@@ -35,7 +35,7 @@ function Header({ auth }) {
                                     <Dropdown.Trigger>
                                         <button className="flex items-center gap-3 px-3 py-2 transition duration-150 ease-in-out hover:opacity-80 focus:outline-none">
             
-                                            <span className="text-sm font-medium text-gray-700">
+                                            <span className="max-sm:hidden text-sm font-medium text-gray-700">
                                                 Cześć, {auth?.user?.name || 'Użytkowniku'}!
                                             </span>
             
@@ -174,7 +174,7 @@ function MainContent({ userCount, zamowieniaCount, ostatnieZamowienia, dzisiejsz
 
 export default function Main({ auth, userCount, zamowieniaCount, ostatnieZamowienia, dzisiejszeWizytyCount, pytaniaCount }) {
     return (
-        <div className="h-screen overflow-hidden flex flex-col">
+        <div className="min-h-screen flex flex-col">
             <Head title="Panel Zarządzania" />
             <Header auth={auth} />
             <div className="flex-grow">

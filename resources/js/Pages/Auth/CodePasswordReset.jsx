@@ -71,17 +71,17 @@ export default function ForgotPassword({ status }) {
 
                 <InputError message={errors.code} className="mt-2" />
 
-                <div className="grid grid-cols-2 mt-4 flex items-center justify-end">
+                <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-end gap-2">
                     <Link 
                         href={route('password.request')} 
-                        className="group inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-[#F1511A] transition-colors duration-200"
+                        className="order-2 sm:order-1 group inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-[#F1511A] transition-colors duration-200"
                     >
                         <svg className="w-5 h-5 transition-transform duration-200 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
                         </svg>
                         Wróć
                     </Link>
-                    <PrimaryButton className="ms-4" disabled={processing}>
+                    <PrimaryButton className="order-1 sm:order-2 ms-0 sm:ms-4" disabled={processing}>
                         enter code
                     </PrimaryButton>
                 </div>
