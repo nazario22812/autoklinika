@@ -94,8 +94,9 @@ function OrderRow({ zamowienie }) {
                 </td>
                 
                 <td className='px-8 py-5 text-left'>
-                    {new Date(zamowienie.created_at).toLocaleDateString('pl-PL')}
-
+                    <span className='px-3 py-1.5 rounded-lg text-sm font-semibold text-gray-700 bg-gray-100'>
+                        {zamowienie.data_wizyty}
+                    </span>
                 </td>
 
                 {/* <td className="px-8 py-5 text-right "> 
@@ -235,7 +236,7 @@ function MainContent({ auth, zamowienia }) {
                                 <th className="px-8 py-4 font-medium">Marka i Model</th>
                                 <th className="px-8 py-4 font-medium">Numer rejestracyjny</th>
                                 <th className="px-8 py-4 font-medium">Rok</th>
-                                <th className="px-8 py-4 font-medium">Data</th>
+                                <th className="px-8 py-4 font-medium">Data wizyty</th>
                                 {/* <th className="px-8 py-4 font-medium text-right">Usluga</th> */}
                                 <th className="px-8 py-4 font-medium text-right">Status</th>
 
