@@ -50,7 +50,7 @@ function MainContent() {
 
             <div className="relative z-10 flex min-h-[60vh] items-end">
                 <div className="w-full max-w-6xl mx-auto px-4 py-10 sm:px-2 sm:py-16 lg:px-1 lg:py-20 lg:-translate-x-30 xl:-translate-x-40">
-                    <div className="max-w-3xl lg:max-w-5xl md:max-w-4xl rounded-3xl bg-black/50 border border-white/10 p-6 sm:p-10 backdrop-blur-sm lg:ml-0 lg:mr-auto xl:ml-8">
+                    <div className="max-w-3xl lg:max-w-5xl md:max-w-4xl rounded-3xl bg-black/70 border border-white/10 p-6 sm:p-10 backdrop-blur-sm lg:ml-0 lg:mr-auto xl:ml-8">
                         <p className="text-sm uppercase tracking-[0.3em] text-orange-300 mb-4">
                             Autoklinika - serwis samochodowy
                         </p>
