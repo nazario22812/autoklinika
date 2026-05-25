@@ -8,96 +8,8 @@ import InputLabel from '@/Components/InputLabel';
 import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
+import ResponsiveNav from '@/Components/ResponsiveNav';
 
-function Header({ auth }) {
-    
-    return (
-        <nav className="bg-white border-b border-gray-200">
-                    <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                        <div className="flex justify-between h-16">
-                            <div className="flex">
-                                {/* logo */}
-                                <div className="shrink-0 flex items-center">
-                                    <Link href="/">
-                                        <ApplicationLogo className="block h-10 w-10 fill-current text-gray-900" />
-                                    </Link>
-                                    <h2 className="ml-4 text-xl font-semibold leading-tight text-gray-800">
-                                        Moje zamówienia
-                                    </h2>
-                                </div>
-                            </div>
-
-                            <div className='flex items-center'>
-                                <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center ">
-                                    <Link href="/booking" className="text-sm font-medium text-gray-700 ml-5 mr-5 ">
-                                        Rezerwacja
-                                    </Link>
-                                </div>
-                                <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center ">
-                                    <Link href="/services" className="text-sm font-medium text-gray-700 ml-5 mr-5 ">
-                                        Usługi
-                                    </Link>
-                                </div>
-                                                    
-                            
-                                <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center border-b-[3px] border-gray-900 bg-gray-100">
-                                    <Link href="/check-order" className="text-sm font-medium text-gray-700 ml-5 mr-5">
-                                        Moje zamówienia
-                                    </Link>
-                                </div>
-                                                    
-                                <div className="active:bg-gray-300 active:border-b-[3px] active:border-orange-600 hover:bg-gray-200 hover:border-b-[3px] hover:border-blue-500 h-full w-full flex items-center">
-                                    <Link href="/faq" className="text-sm font-medium text-gray-700 ml-5 mr-5 ">
-                                        FAQ
-                                    </Link>
-                                </div>
-                            </div>
-
-                            
-                            {/* ПРАВА ЧАСТИНА (Кнопка або випадайка) */}
-                            <div className="hidden sm:flex sm:items-center sm:ml-2 gap-10">
-                                
-                                {/* <Link href="/dashboard" className="text-sm font-medium text-gray-700 hover:text-gray-900 mr-20">
-                                    Dashboard
-                                </Link> */}
-                                <Dropdown>
-                                    <Dropdown.Trigger>
-                                        <button className="flex items-center gap-3 px-3 py-2 transition duration-150 ease-in-out hover:opacity-80 focus:outline-none">
-            
-                                            <span className="text-sm font-medium text-gray-700">
-                                                Cześć, {auth?.user?.name || 'Użytkowniku'}!
-                                            </span>
-            
-                                            <img 
-                                                src="https://cdn-icons-png.flaticon.com/128/18827/18827926.png" 
-                                                className="h-10 w-10 rounded-full object-cover shadow-sm" 
-                                                alt="Avatar" 
-                                            />
-            
-                                        </button>
-                                    </Dropdown.Trigger>
-
-                                    <Dropdown.Content>
-                                         <Dropdown.Link href={route('profile.edit')} className='font-semibold text-xs' > {/*href={route('profile.edit')} */}
-                                            Mój profil
-                                        </Dropdown.Link>
-                                        {auth?.user?.is_admin && (
-                                            <Dropdown.Link href={route('admin.dashboard')}>
-                                                Panel Admina
-                                            </Dropdown.Link>
-                                        )}
-                                        <Dropdown.Link className='font-semibold text-xs' href={route('logout')} method="post" as="button">
-                                            Wyjście
-                                        </Dropdown.Link>
-                                    </Dropdown.Content>
-                                </Dropdown>
-                            </div>
-                        </div>
-                    </div>
-                </nav>
-
-    );
-}
 
 
 
@@ -246,7 +158,7 @@ export default function Main({ auth, zamowienie }) {
     return (
             <div className="h-screen overflow-hidden flex flex-col">
                 <Head title="Moje zamówienia" />
-                <Header auth={auth} />
+                <ResponsiveNav auth={auth} pageTitle="Szczegóły zamówienia" />
                 <div className="flex-grow">
                     <MainContent zamowienie={zamowienie} />
                 </div>
