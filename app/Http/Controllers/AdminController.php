@@ -28,15 +28,16 @@ class AdminController extends Controller
         $zamowieniaCount = Wizyta::where([['status', '!=', 'oplacone'],[ 'status', '!=', 'anulowane']])->latest()->count();
         $ostatnieZamowienia = Wizyta::where('mechanik_id', Auth::id())->where('status', '!=', 'anulowane')->where('status', '!=', 'oplacone')->latest()->first();
         $dzisiejszeWizytyCount = Wizyta::where('data_wizyty', Carbon::today()->format('Y-m-d'))
-                                   ->where('status', '!=', 'anulowane') // не рахуємо скасовані
+                                   ->where('status', '!=', 'anulowane') 
                                    ->count();
-
+        $historyczneZamowieniaCount = Wizyta::whereIn('status', ['oplacone', 'anulowane'])->count();
         $pytaniaCount = Pytanie::where('status', 'oczekujące')->latest()->count();
         return Inertia::render('Admin/Dashboard', [
             'dzisiejszeWizytyCount' => $dzisiejszeWizytyCount,
             'userCount' => $userCount,
             'zamowieniaCount' => $zamowieniaCount,
             'ostatnieZamowienia' => $ostatnieZamowienia,
+            'historyczneZamowieniaCount' => $historyczneZamowieniaCount,
             'pytaniaCount' => $pytaniaCount
         ]);
     }
@@ -117,6 +118,14 @@ class AdminController extends Controller
     public function getallorders(){
         $zamowienia = Wizyta::where([['status', '!=', 'oplacone'],[ 'status', '!=', 'anulowane']])->latest()->get();
         return Inertia::render('Admin/ZamowienieList', [
+            'zamowienia' => $zamowienia,
+        ]);
+
+    }
+
+    public function gethistory(){
+        $zamowienia = Wizyta::whereIn('status', ['oplacone', 'anulowane'])->latest()->get();
+        return Inertia::render('Admin/Historia', [
             'zamowienia' => $zamowienia,
         ]);
 

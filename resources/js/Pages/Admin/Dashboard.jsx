@@ -68,13 +68,14 @@ function Header({ auth }) {
 
 
 
-function MainContent({ userCount, zamowieniaCount, ostatnieZamowienia, dzisiejszeWizytyCount, pytaniaCount }) {
+function MainContent({ userCount, zamowieniaCount, ostatnieZamowienia, dzisiejszeWizytyCount, pytaniaCount, historyczneZamowieniaCount }) {
     const cards = [
         { title: 'Lista użytkowników', desc: 'Zarządzaj bazą klientów', stats: userCount, label: 'użytkowników', icon: Users, link: '/admin/user-list' },
         { title: 'Wszystkie zamówienia', desc: 'Przeglądaj historię zamówień', stats: zamowieniaCount, label: 'zamówień', icon: ClipboardList, link: '/admin/zamowienia' },
         { title: 'Aktywne zamówienia', desc: 'Te, które są w trakcie realizacji', stats: ostatnieZamowienia?.marka + ' ' + ostatnieZamowienia?.model || 'Brak', label: 'ostatnie', icon: Activity, link: '/admin/active-orders' },
         { title: 'Kalendarz wizyt', desc: 'Harmonogram pracy warsztatu', stats: dzisiejszeWizytyCount, label: 'wizyt dzisiaj', icon: Calendar, link: '/admin/calendar' },
         { title: 'Lista pytań', desc: 'Pomóż innym użytkownikom', stats: pytaniaCount, label: 'oczekujących', icon: MessageSquare, link: '/admin/pytania' },
+        { title: 'Historia zamówień', desc: 'Przeglądaj historię zamówień', stats: historyczneZamowieniaCount, label: 'zamówień', icon: ClipboardList, link: '/admin/historia' }
     ];
 
     return (
@@ -114,13 +115,13 @@ function MainContent({ userCount, zamowieniaCount, ostatnieZamowienia, dzisiejsz
 }
 
 
-export default function Main({ auth, userCount, zamowieniaCount, ostatnieZamowienia, dzisiejszeWizytyCount, pytaniaCount }) {
+export default function Main({ auth, userCount, zamowieniaCount, ostatnieZamowienia, dzisiejszeWizytyCount, pytaniaCount, historyczneZamowieniaCount }) {
     return (
         <div className="min-h-screen flex flex-col">
             <Head title="Panel Zarządzania" />
             <Header auth={auth} />
             <div className="flex-grow">
-                <MainContent userCount={userCount} zamowieniaCount={zamowieniaCount} ostatnieZamowienia={ostatnieZamowienia} dzisiejszeWizytyCount={dzisiejszeWizytyCount} pytaniaCount={pytaniaCount} />
+                <MainContent userCount={userCount} zamowieniaCount={zamowieniaCount} ostatnieZamowienia={ostatnieZamowienia} dzisiejszeWizytyCount={dzisiejszeWizytyCount} pytaniaCount={pytaniaCount} historyczneZamowieniaCount={historyczneZamowieniaCount} />
             </div>
         </div>
         // <>
