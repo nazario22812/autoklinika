@@ -14,27 +14,27 @@ function OrderRow({ zamowienie }) {
     return (
         <>
             <tr className="hover:bg-gray-300 transition-colors duration-150 group">
-                <td className="px-8 py-5 text-gray-600 font-bold text-center">
+                <td className="px-4 py-4 sm:px-8 sm:py-5 text-gray-600 font-bold text-center">
                     {zamowienie.marka}
                 </td>
                 
-                <td className="px-8 py-5 text-gray-600 text-center">
+                <td className="px-4 py-4 sm:px-8 sm:py-5 text-gray-600 text-center">
                     {zamowienie.model}
                 </td>
                 
-                <td className="px-8 py-5 text-center">
+                <td className="px-4 py-4 sm:px-8 sm:py-5 text-center">
                     <span className='px-3 py-1.5 rounded-lg text-lg font-semibold text-purple-700 bg-purple-100'>
                         {zamowienie.rok_produkcji}
                     </span>
                 </td>
                 
-                <td className="px-8 py-5 text-center text-sm text-gray-500 font-mono">
+                <td className="px-4 py-4 sm:px-8 sm:py-5 text-center text-sm text-gray-500 font-mono">
                     <span className='px-3 py-1.5 rounded-lg text-lg font-semibold text-green-700 bg-green-100'>
                         {zamowienie.numer_rejestracyjny}
                     </span>
                 </td>
 
-                <td className="px-8 py-5 text-right">
+                <td className="px-4 py-4 sm:px-8 sm:py-5 text-right">
                     <button 
                         onClick={() => router.get(route('admin.activeorders.detail', zamowienie.id))}
                         // onClick={() => setIsOpen(!isOpen)}
@@ -55,9 +55,9 @@ function OrderRow({ zamowienie }) {
 function MainContent({ auth, zamowienia }) {
 
     return (
-        <div className="min-h-screen bg-gradient-to-b from-[#F1511A] to-[#FFAA01] py-12 px-4">
+        <div className="min-h-screen bg-gradient-to-b from-[#F1511A] to-[#FFAA01] py-12 px-4 sm:px-6 lg:px-8">
             <div className="max-w-7xl mx-auto bg-gray-200 rounded-3xl shadow-2xl p-6 md:p-12">
-                <div className='w-full h-10 mx-auto rounded-2xl'>
+                <div className='w-full h-10 rounded-2xl'>
                         <Link 
                             href={route('admin.dashboard')} 
                             className="pl-4 group inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-[#F1511A] transition-colors duration-200"
@@ -76,14 +76,14 @@ function MainContent({ auth, zamowienia }) {
                 </div>
                 
                 <div className="overflow-x-auto bg-white rounded-2xl shadow-sm">
-                    <table className="w-full text-left border-collapse">
+                    <table className="min-w-full w-full text-left border-collapse">
                         <thead>
                             <tr className="bg-gray-100 text-gray-500 text-sm uppercase tracking-wider">
-                                <th className="px-8 py-4 font-medium text-center">Marka</th>
-                                <th className="px-8 py-4 font-medium text-center">Model</th>
-                                <th className="px-8 py-4 font-medium text-center">Rok produkcji</th>
-                                <th className="px-8 py-4 font-medium text-center">Numer rejestracyjny</th>
-                                <th className="px-8 py-4 font-medium text-center"></th> 
+                                <th className="px-4 py-3 sm:px-8 sm:py-4 font-medium text-center">Marka</th>
+                                <th className="px-4 py-3 sm:px-8 sm:py-4 font-medium text-center">Model</th>
+                                <th className="px-4 py-3 sm:px-8 sm:py-4 font-medium text-center">Rok produkcji</th>
+                                <th className="px-4 py-3 sm:px-8 sm:py-4 font-medium text-center">Numer rejestracyjny</th>
+                                <th className="px-4 py-3 sm:px-8 sm:py-4 font-medium text-center"></th> 
                             </tr>
                         </thead>
                         <tbody className="divide-y divide-gray-100">

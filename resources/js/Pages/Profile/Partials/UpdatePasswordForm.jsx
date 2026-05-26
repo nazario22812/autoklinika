@@ -4,7 +4,9 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { useForm } from '@inertiajs/react';
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function UpdatePasswordForm({ className = '' }) {
     const passwordInput = useRef();
@@ -14,7 +16,7 @@ export default function UpdatePasswordForm({ className = '' }) {
         data,
         setData,
         errors,
-        put,
+        post,
         reset,
         processing,
         recentlySuccessful,
@@ -24,10 +26,25 @@ export default function UpdatePasswordForm({ className = '' }) {
         password_confirmation: '',
     });
 
+
+    useEffect(() => {
+        if (recentlySuccessful) {
+            toast.success("Zaktualizowano hasło!", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            });
+        }
+    }, [recentlySuccessful]);
+
     const updatePassword = (e) => {
         e.preventDefault();
 
-        put(route('password.update'), {
+        post(route('psswd.update'), {
             preserveScroll: true,
             onSuccess: () => reset(),
             onError: (errors) => {
@@ -48,12 +65,11 @@ export default function UpdatePasswordForm({ className = '' }) {
         <section className={className}>
             <header>
                 <h2 className="text-lg font-medium text-gray-900">
-                    Update Password
+                    Zaaktulizuj hasło
                 </h2>
 
                 <p className="mt-1 text-sm text-gray-600">
-                    Ensure your account is using a long, random password to stay
-                    secure.
+                    Upewnij się, że Twoje konto używa długiego, losowego hasła, aby pozostało bezpieczne.
                 </p>
             </header>
 
@@ -123,8 +139,8 @@ export default function UpdatePasswordForm({ className = '' }) {
 
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing} className='bg-red-500 hover:bg-red-700'>Save</PrimaryButton>
-
-                    <Transition
+                    <ToastContainer />
+                    {/* <Transition
                         show={recentlySuccessful}
                         enter="transition ease-in-out"
                         enterFrom="opacity-0"
@@ -134,7 +150,7 @@ export default function UpdatePasswordForm({ className = '' }) {
                         <p className="text-sm text-gray-600">
                             Saved.
                         </p>
-                    </Transition>
+                    </Transition> */}
                 </div>
             </form>
         </section>

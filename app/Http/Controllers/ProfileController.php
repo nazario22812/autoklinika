@@ -10,7 +10,8 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Inertia\Inertia;
 use Inertia\Response;
-
+use Illuminate\Validation\Rules\Password;
+use Illuminate\Support\Facades\Hash;
 class ProfileController extends Controller
 {
     /**
@@ -38,6 +39,24 @@ class ProfileController extends Controller
         $request->user()->save();
 
         return Redirect::route('profile.edit');
+    }
+
+    public function updatepassword(Request $request): RedirectResponse{
+        $validated = $request->validate([
+            'current_password' => ['required', 'current_password'], 
+            'password' => [
+                'required', 
+                'confirmed', 
+                Password::min(8)->letters()->mixedCase()->numbers()->symbols() 
+            ],
+        ]);
+
+    
+        $request->user()->update([
+            'password' => Hash::make($validated['password']),
+        ]);
+
+        return  back();
     }
 
     /**

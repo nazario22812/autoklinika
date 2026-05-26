@@ -74,8 +74,8 @@ Route::middleware(['auth'])->group(function () {
 
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::post('/logout', [AuthenticatedSessionController::class, 'destroy'])->name('logout');
-
-    
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile', [ProfileController::class, 'updatepassword'])->name('psswd.update');
     
     
     Route::get('/services', function () {

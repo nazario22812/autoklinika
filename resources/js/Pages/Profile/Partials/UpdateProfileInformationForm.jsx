@@ -4,6 +4,9 @@ import PrimaryButton from '@/Components/PrimaryButton';
 import TextInput from '@/Components/TextInput';
 import { Transition } from '@headlessui/react';
 import { Link, useForm, usePage } from '@inertiajs/react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import { useEffect } from 'react';
 
 export default function UpdateProfileInformation({
     mustVerifyEmail,
@@ -25,6 +28,20 @@ export default function UpdateProfileInformation({
 
         patch(route('profile.update'));
     };
+
+    useEffect(() => {
+        if (recentlySuccessful) {
+            toast.success("Zaktualizowano informacje profilowe!", {
+                position: "top-right",
+                autoClose: 3000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                theme: "light",
+            });
+        }
+    }, [recentlySuccessful]);
 
     return (
         <section className={className}>
@@ -105,7 +122,7 @@ export default function UpdateProfileInformation({
                     <InputError className="mt-2" message={errors.email} />
                 </div>
 
-                {mustVerifyEmail && user.email_verified_at === null && (
+                {/* {mustVerifyEmail && user.email_verified_at === null && (
                     <div>
                         <p className="mt-2 text-sm text-gray-800">
                             Your email address is unverified.
@@ -126,22 +143,23 @@ export default function UpdateProfileInformation({
                             </div>
                         )}
                     </div>
-                )}
+                )} */}
 
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing} className='bg-red-500 hover:bg-red-700'>Save</PrimaryButton>
-
-                    <Transition
+                    <ToastContainer />                   
+                     {/* <Transition
                         show={recentlySuccessful}
                         enter="transition ease-in-out"
                         enterFrom="opacity-0"
                         leave="transition ease-in-out"
                         leaveTo="opacity-0"
-                    >
+                    > */}
+{/*                        
                         <p className="text-sm text-gray-600">
                             Saved.
-                        </p>
-                    </Transition>
+                        </p> */}
+                    {/* </Transition> */}
                 </div>
             </form>
         </section>

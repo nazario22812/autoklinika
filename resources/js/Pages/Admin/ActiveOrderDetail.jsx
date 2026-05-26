@@ -39,21 +39,21 @@ function MainContent({ zamowienie }) {
     };
 
     return (
-        <div className="overflow-hidden min-h-screen bg-gradient-to-b from-[#F1511A] to-[#FFAA01]">
-            <div className='w-3/5 h-[80vh] bg-gray-200 mx-auto rounded-2xl mt-10 shadow-xl flex flex-col'>
+        <div className="min-h-screen bg-gradient-to-b from-[#F1511A] to-[#FFAA01] py-6 px-4 sm:px-6 lg:px-8">
+            <div className='w-full max-w-5xl mx-auto bg-gray-200 rounded-2xl mt-10 shadow-xl flex flex-col'>
                 <div className="py-5 h-full flex flex-col relative overflow-y-auto">
                     
-                    <div className='w-full h-10 mx-auto rounded-2xl'>
+                    <div className='w-full rounded-2xl'>
                         <Link href={route('admin.activeorders')} className="pl-4 group inline-flex items-center gap-2 text-sm font-semibold text-gray-600 hover:text-[#F1511A] transition-colors duration-200">
                             <svg className="w-5 h-5 transition-transform duration-200 group-hover:-translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" /></svg>
                             Wróć
                         </Link>
                     </div>
 
-                    <div className='bg-gray-100 rounded-2xl w-[85%] mx-auto shadow-sm p-8 mt-2 mb-8 flex-grow'>
+                    <div className='bg-gray-100 rounded-2xl w-full max-w-4xl mx-auto shadow-sm p-6 sm:p-8 mt-2 mb-8 flex-grow'>
                         
                         <form onSubmit={handleSubmit}>
-                            <div className='flex justify-between items-start border-b border-gray-200 pb-6'>
+                            <div className='flex flex-col gap-4 justify-between items-start border-b border-gray-200 pb-6 sm:flex-row sm:items-center'>
                                 <div>
                                     <p className='text-3xl font-bold text-gray-900'>{zamowienie.marka} {zamowienie.model}</p>
                                     <span className='mt-2 inline-block bg-gray-200 text-gray-600 px-3 py-1 rounded border border-gray-300 text-sm font-mono uppercase tracking-wider'>
@@ -61,12 +61,12 @@ function MainContent({ zamowienie }) {
                                     </span>
                                 </div>
                                 
-                                <div className="flex flex-col items-end">
+                                <div className="w-full sm:w-auto flex flex-col items-start sm:items-end">
                                     <label className="text-sm text-gray-500 font-semibold mb-1">Status zamówienia</label>
                                     <select 
                                         value={data.status}
                                         onChange={(e) => setData('status', e.target.value)}
-                                        className={`rounded-xl text-lg font-bold border border-gray-300 px-4 py-2 uppercase tracking-wide shadow-sm focus:ring-[#F1511A] focus:border-[#F1511A] cursor-pointer ${statusy(data.status)}`}
+                                        className={` rounded-xl text-lg font-bold border border-gray-300 px-4 py-2 uppercase tracking-wide shadow-sm focus:ring-[#F1511A] focus:border-[#F1511A] cursor-pointer ${statusy(data.status)} sm:w-auto`}
                                     >
                                         <option value="oczekujące">Oczekujące</option>
                                         <option value="rozpatrywane">Rozpatrywane (Wycena)</option>
@@ -130,7 +130,7 @@ function MainContent({ zamowienie }) {
                                             value={data.cena}
                                             onChange={(e) => setData('cena', e.target.value)}
                                             placeholder="Np. 450"
-                                            className="w-1/2 text-center text-3xl font-extrabold text-[#F1511A] bg-white border border-orange-300 rounded-xl p-3 focus:ring-2 focus:ring-[#F1511A] focus:border-[#F1511A] outline-none"
+                                            className="w-full sm:w-1/2 text-center text-3xl font-extrabold text-[#F1511A] bg-white border border-orange-300 rounded-xl p-3 focus:ring-2 focus:ring-[#F1511A] focus:border-[#F1511A] outline-none"
                                         />
                                     </div>
                                 </div>
@@ -140,7 +140,7 @@ function MainContent({ zamowienie }) {
                                 <button 
                                     type="submit" 
                                     disabled={processing}
-                                    className={`px-8 py-3 rounded-xl text-white font-bold text-lg shadow-md transition-all duration-200 hover:-translate-y-1 ${processing ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#F1511A] hover:bg-orange-600 hover:shadow-xl'}`}
+                                    className={`w-full sm:w-auto px-8 py-3 rounded-xl text-white font-bold text-lg shadow-md transition-all duration-200 hover:-translate-y-1 ${processing ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#F1511A] hover:bg-orange-600 hover:shadow-xl'}`}
                                 >
                                     {processing ? 'Zapisywanie...' : 'Zapisz zmiany'}
                                 </button>
@@ -156,10 +156,10 @@ function MainContent({ zamowienie }) {
 
 export default function Main({ auth, zamowienie }) {
     return (
-            <div className="h-screen overflow-hidden flex flex-col">
+            <div className="min-h-screen flex flex-col">
                 <Head title="Moje zamówienia" />
                 <ResponsiveNav auth={auth} pageTitle="Szczegóły zamówienia" />
-                <div className="flex-grow">
+                <div className="flex-grow overflow-auto">
                     <MainContent zamowienie={zamowienie} />
                 </div>
             </div>
