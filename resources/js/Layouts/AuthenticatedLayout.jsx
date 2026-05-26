@@ -4,13 +4,16 @@ import NavLink from '@/Components/NavLink';
 import ResponsiveNavLink from '@/Components/ResponsiveNavLink';
 import { Link, usePage } from '@inertiajs/react';
 import { useState } from 'react';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export default function AuthenticatedLayout({ header, children , auth }) {
     const user = usePage().props.auth.user;
 
+    
+
     const [showingNavigationDropdown, setShowingNavigationDropdown] =
         useState(false);
-
     return (
         <div className="min-h-screen bg-gradient-to-b from-[#F1511A] to-[#FFAA01]">
             <nav className="border-b border-gray-200 bg-white">
@@ -59,6 +62,7 @@ export default function AuthenticatedLayout({ header, children , auth }) {
                                                 Panel Admina
                                             </Dropdown.Link>
                                         )}
+                                        
 
                                         <Dropdown.Link className='font-semibold text-xs' href={route('logout')} method="post" as="button">
                                             Wyjście
@@ -161,6 +165,9 @@ export default function AuthenticatedLayout({ header, children , auth }) {
             )}
 
             <main>{children}</main>
+            <ToastContainer />
+
         </div>
+
     );
 }

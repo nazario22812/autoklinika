@@ -29,15 +29,18 @@ export default function UpdatePasswordForm({ className = '' }) {
 
     useEffect(() => {
         if (recentlySuccessful) {
-            toast.success("Zaktualizowano hasło!", {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                theme: "light",
-            });
+            if (!toast.isActive('success-profile-toast')) {
+                toast.success("Zaktualizowano pomyślnie!", {
+                    toastId: 'success-profile-toast',
+                    position: "top-right",
+                    autoClose: 5000, 
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                });
+            }
         }
     }, [recentlySuccessful]);
 
@@ -139,7 +142,7 @@ export default function UpdatePasswordForm({ className = '' }) {
 
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing} className='bg-red-500 hover:bg-red-700'>Save</PrimaryButton>
-                    <ToastContainer />
+                    {/* <ToastContainer /> */}
                     {/* <Transition
                         show={recentlySuccessful}
                         enter="transition ease-in-out"

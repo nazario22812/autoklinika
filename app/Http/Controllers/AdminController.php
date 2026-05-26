@@ -26,9 +26,9 @@ class AdminController extends Controller
     public function counts(){
         $userCount = User::latest()->count();
         $zamowieniaCount = Wizyta::where([['status', '!=', 'oplacone'],[ 'status', '!=', 'anulowane']])->latest()->count();
-        $ostatnieZamowienia = Wizyta::where('mechanik_id', Auth::id())->where('status', '!=', 'anulowane')->where('status', '!=', 'oplacone')->latest()->first();
+        $ostatnieZamowienia = Wizyta::where('mechanik_id', Auth::id())->where([['status', '!=', 'anulowane'], ['status', '!=', 'oplacone']])->latest()->first();
         $dzisiejszeWizytyCount = Wizyta::where('data_wizyty', Carbon::today()->format('Y-m-d'))
-                                   ->where('status', '!=', 'anulowane') 
+                                   ->where([['status', '!=', 'anulowane'], ['mechanik_id', Auth::id()]])
                                    ->count();
         $historyczneZamowieniaCount = Wizyta::whereIn('status', ['oplacone', 'anulowane'])->count();
         $pytaniaCount = Pytanie::where('status', 'oczekujące')->latest()->count();
@@ -70,7 +70,7 @@ class AdminController extends Controller
     }
 
     public function harmonogram(){
-        $wizyty = Wizyta::where('status', '!=', 'anulowane')->where('status', '!=', 'oplacone')->where('mechanik_id', Auth::id())->get();
+        $wizyty = Wizyta::where([['status', '!=', 'anulowane'], ['mechanik_id', Auth::id()]])->get();
 
         $events = $wizyty->map(function($w) {
             return [
@@ -102,7 +102,7 @@ class AdminController extends Controller
     }
 
     public function getactiveorders(){
-        $zamowienia = Wizyta::where('mechanik_id', Auth::id())->where('status', '!=', 'oplacone')->latest()->get();
+        $zamowienia = Wizyta::where('mechanik_id', Auth::id())->where([['status', '!=', 'oplacone'], ['status', '!=', 'anulowane']])->latest()->get();
         return Inertia::render('Admin/ActiveOrderList', [
             'zamowienia' => $zamowienia
         ]);

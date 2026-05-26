@@ -8,6 +8,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useEffect } from 'react';
 
+
 export default function UpdateProfileInformation({
     mustVerifyEmail,
     status,
@@ -31,15 +32,18 @@ export default function UpdateProfileInformation({
 
     useEffect(() => {
         if (recentlySuccessful) {
-            toast.success("Zaktualizowano informacje profilowe!", {
-                position: "top-right",
-                autoClose: 3000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                theme: "light",
-            });
+            if (!toast.isActive('success-profile-toast')) {
+                toast.success("Zaktualizowano pomyślnie!", {
+                    toastId: 'success-profile-toast',
+                    position: "top-right",
+                    autoClose: 5000, 
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    theme: "light",
+                });
+            }
         }
     }, [recentlySuccessful]);
 
@@ -147,7 +151,6 @@ export default function UpdateProfileInformation({
 
                 <div className="flex items-center gap-4">
                     <PrimaryButton disabled={processing} className='bg-red-500 hover:bg-red-700'>Save</PrimaryButton>
-                    <ToastContainer />                   
                      {/* <Transition
                         show={recentlySuccessful}
                         enter="transition ease-in-out"
