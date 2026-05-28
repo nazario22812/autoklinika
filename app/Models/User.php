@@ -14,7 +14,6 @@ class User extends Model implements AuthenticatableContract
     protected $connection = 'mongodb';
     protected $collection = 'users';
 
-    // Твої дозволені поля (не забудь про телефон)
     protected $fillable = [
         'is_admin',
         'name',
@@ -24,7 +23,6 @@ class User extends Model implements AuthenticatableContract
         'phone_number', 
     ];
 
-    // Ховаємо пароль, щоб він випадково не вивівся на екран
     protected $hidden = [
         'password',
         'remember_token',
