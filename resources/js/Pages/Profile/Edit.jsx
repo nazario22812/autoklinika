@@ -3,7 +3,7 @@ import { Head } from '@inertiajs/react';
 import UpdatePasswordForm from './Partials/UpdatePasswordForm';
 import UpdateProfileInformationForm from './Partials/UpdateProfileInformationForm';
 
-export default function Edit( { auth } ) {// mustVerifyEmail status
+export default function Edit( { auth } ) {
     return (
         <AuthenticatedLayout auth ={auth}>
             <Head title="Profile" />

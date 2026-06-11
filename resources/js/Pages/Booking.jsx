@@ -106,7 +106,6 @@ function MainContent() {
                             </section>
                         </div>
 
-                        {/* Prawa kolumna */}
                         <div>
                             <section>
                                 <div className="space-y-4 sm:space-y-6">
@@ -181,7 +180,6 @@ function MainContent() {
                         </div>
                     </div>
 
-                    {/* Podsumowanie rezerwacji */}
                     <div className="mt-6 sm:mt-8 p-4 sm:p-6 rounded-2xl border border-white-500">
                         <h3 className="text-base sm:text-lg font-bold text-gray-800 mb-4 sm:mb-6 border-b pb-2">
                             Podsumowanie rezerwacji
@@ -219,7 +217,6 @@ function MainContent() {
                         </div>
                     </div>
 
-                    {/* Submit button */}
                     <div>
                         <PrimaryButton className='w-full sm:w-auto' disabled={processing}>
                             Potwierdź rezerwację

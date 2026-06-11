@@ -25,12 +25,8 @@ function Header({ auth }) {
         
                             </div>
         
-                            {/* ПРАВА ЧАСТИНА (Кнопка або випадайка) */}
                             <div className="sm:flex sm:items-center sm:ml-2 gap-10">
                                 
-                                {/* <Link href="/dashboard" className="text-sm font-medium text-gray-700 hover:text-gray-900 mr-20">
-                                    Dashboard
-                                </Link> */}
                                 <Dropdown>
                                     <Dropdown.Trigger>
                                         <button className="flex items-center gap-3 px-3 py-2 transition duration-150 ease-in-out hover:opacity-80 focus:outline-none">
@@ -107,7 +103,6 @@ function MainContent() {
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 lg:gap-10 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8">
     
   
-                    {/* Секція 1: Послуги */}
                     <div className="bg-gray-200 p-4 sm:p-6 lg:p-8 flex flex-col items-center justify-center text-center rounded-xl shadow-sm transition hover:shadow-md">
                         <div className="mb-4 text-gray-900">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 sm:h-20 sm:w-20 lg:h-[80px] lg:w-[80px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -122,7 +117,6 @@ function MainContent() {
                         </Link>
                     </div>
 
-                    {/* Секція 2: Статус замовлення */}
                     <div className="bg-gray-200 p-4 sm:p-6 lg:p-8 flex flex-col items-center justify-center text-center rounded-xl shadow-sm transition hover:shadow-md">
                         <div className="mb-4 text-gray-900">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 sm:h-20 sm:w-20 lg:h-[80px] lg:w-[80px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -137,7 +131,6 @@ function MainContent() {
                         </Link>
                     </div>
 
-                    {/* Секція 3: FAQ */}
                     <div className="bg-gray-200 p-4 sm:p-6 lg:p-8 flex flex-col items-center justify-center text-center rounded-xl shadow-sm transition hover:shadow-md">
                         <div className="mb-4 text-gray-900">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-16 w-16 sm:h-20 sm:w-20 lg:h-[80px] lg:w-[80px]" fill="none" viewBox="0 0 24 24" stroke="currentColor">

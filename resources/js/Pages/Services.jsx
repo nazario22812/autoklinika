@@ -1,4 +1,4 @@
-import React, { useState } from 'react'; // ДОДАНО useState
+import React, { useState } from 'react'; 
 import ApplicationLogo from '@/Components/ApplicationLogo';
 import NavLink from '@/Components/NavLink';
 import Dropdown from '@/Components/Dropdown';
