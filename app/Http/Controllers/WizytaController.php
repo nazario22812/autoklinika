@@ -42,7 +42,7 @@ class WizytaController extends Controller
 
         $czyZajete = Wizyta::where('data_wizyty', $request->data)
                        ->where('godzina_wizyty', $request->godzina)
-                       ->where('status', '!=', 'anulowane') // Скасовані не рахуємо
+                       ->where('status', '!=', 'anulowane') 
                        ->exists();
 
         if ($czyZajete) {

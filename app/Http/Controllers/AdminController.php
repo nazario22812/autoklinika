@@ -117,6 +117,7 @@ class AdminController extends Controller
 
     public function getallorders(){
         $zamowienia = Wizyta::where([['status', '!=', 'oplacone'],[ 'status', '!=', 'anulowane']])->latest()->get();
+    
         return Inertia::render('Admin/ZamowienieList', [
             'zamowienia' => $zamowienia,
         ]);
